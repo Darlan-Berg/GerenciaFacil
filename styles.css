@@ -1,0 +1,66 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.cabecalho {
+    height: 150px;
+    background-color: lightgray;
+    text-align: center;
+    line-height: 100px;
+}
+
+.conteudo {
+    display: flex;
+    flex: 1; /* ocupa todo o espaço vertical disponível */
+}
+
+.navegacao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    background-color: lightblue;
+    height: 62.5rem;
+}
+
+.content {
+    width: 80%;
+    height: 62.5rem;
+}
+
+#cabecalho-cadastro-de-compras > h1 {
+    display: inline;
+}
+
+#cabecalho-cadastro-de-compras {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 6rem;
+}
+
+#cabecalho-cadastro-de-compras h1 {
+    margin-right: 2rem;
+}
+
+.card {
+    border-radius: 1rem;
+    background-color: lightgray;
+}
+
+.card p {
+    display: inline;
+    font-size: 1rem;
+}
+
+.card img {
+    width: 20px;
+    height: 20px;
+}
