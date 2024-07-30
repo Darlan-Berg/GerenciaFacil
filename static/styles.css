@@ -14,6 +14,23 @@ body {
     background-color: lightgray;
     text-align: center;
     line-height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.cabecalho h1 {
+    display:inline;
+    margin-left: 5%;
+    
+}
+.cabecalho button {
+    margin-right: 5%;
+    height: 30px;
+
+}
+.cabecalho img {
+    width: 30px;
+    height: 30px;
 }
 
 .conteudo {
