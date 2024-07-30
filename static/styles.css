@@ -1,5 +1,6 @@
 * {
-            box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -9,10 +10,10 @@ body {
 }
 
 .cabecalho {
-    height: 150px; /* Exemplo de altura desejada */
-    background-color: lightgray; /* Exemplo de cor de fundo */
-    text-align: center; /* Centralizar texto dentro do cabeçalho */
-    line-height: 100px; /* Centralizar verticalmente o texto */
+    height: 150px;
+    background-color: lightgray;
+    text-align: center;
+    line-height: 100px;
 }
 
 .conteudo {
@@ -25,14 +26,13 @@ body {
     align-items: center;
     justify-content: center;
     width: 20%;
-    background-color: lightblue; /* Exemplo de cor de fundo */
+    background-color: lightblue;
     height: 62.5rem;
 }
 
 .content {
     width: 80%;
     height: 62.5rem;
-    /* background-color: lightgreen; Exemplo de cor de fundo */
 }
 
 #cabecalho-cadastro-de-compras > h1 {
@@ -50,13 +50,17 @@ body {
     margin-right: 2rem;
 }
 
-.modal {
-    display: none; /* Esconde o modal por padrão */
-    position: fixed; /* Fica fixo na tela */
-    z-index: 1; /* Fica em cima de outros conteúdos */
-    left: 0;
-    top: 0;
-    width: 50%; /* Tamanho total da tela */
-    height: 50%; /* Tamanho total da tela */
-    overflow: auto; /* Permite rolagem se necessário */
+.card {
+    border-radius: 1rem;
+    background-color: lightgray;
+}
+
+.card p {
+    display: inline;
+    font-size: 1rem;
+}
+
+.card img {
+    width: 20px;
+    height: 20px;
 }
