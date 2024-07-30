@@ -22,12 +22,19 @@ body {
 }
 
 .navegacao {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding-top: 30px;
     width: 20%;
     background-color: lightblue;
     height: 62.5rem;
+}
+
+.botao {
+    display: block;
+    width: 90%;
+    height: 100px;
+    margin: auto;
+    margin-bottom: 160px;
+    border-radius: 20px;
 }
 
 .content {
