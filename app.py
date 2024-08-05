@@ -12,3 +12,11 @@ def main():
 @app.route("/estoque")
 def estoque():
     return render_template("estoque.html")
+
+@app.route("/relatorios")
+def estoque():
+    return render_template("relatorios.html")
+
+@app.route("/cadastrovendas")
+def estoque():
+    return render_template("cadastro_vendas.html")
