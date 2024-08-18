@@ -1,9 +1,13 @@
 [
     {
+        "nome": "Bolly",
+        "cpf": "123456789",
         "email": "bolly@gmail.com",
         "senha": "157"
     },
     {
+        "nome": "Davi",
+        "cpf": "987654321",
         "email": "davi@gmail.com",
         "senha": "123"
     }
