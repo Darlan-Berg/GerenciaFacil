@@ -49,10 +49,12 @@ def login():
         senha = request.form["senha"]
         dados = ler_dados()
         for usuario in dados:
-            if usuario["email"] == email and usuario["senha"] == senha:
-                return redirect(url_for("relatorios"))
+            if email and senha:
+                if usuario["email"] == email and usuario["senha"] == senha:
+                    return redirect(url_for("relatorios"))
             else:
-                return "<h1>Senha ou Usuário incorretos</h1>"
+                return "<h1>Por favor preencha todos os campos</h1>"
+        return "<h1>Senha ou Usuário incorretos</h1>"
     return render_template("tela_login.html")
 
 @app.route('/cadastro', methods=["GET", "POST"])
