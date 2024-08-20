@@ -28,7 +28,7 @@ def adicionar_usuario(nome, cpf, email, senha):
 
 @app.route("/")
 def main():
-    return render_template("index.html")
+    return render_template("https://dharllan.pythonanywhere.com/index.html")
 
 @app.route("/estoque")
 def estoque():
