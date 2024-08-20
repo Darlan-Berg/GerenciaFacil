@@ -6,7 +6,7 @@ app = Flask(__name__)
 if __name__ == "__main__":
     app.run(debug=True)
 
-caminho_dados = "dados.json"
+caminho_dados = "https://dharllan.pythonanywhere.com/dados.json"
 
 def ler_dados():
     with open(caminho_dados, "r") as dados:
@@ -28,19 +28,19 @@ def adicionar_usuario(nome, cpf, email, senha):
 
 @app.route("/")
 def main():
-    return render_template("index.html")
+    return render_template("https://dharllan.pythonanywhere.com/templates/index.html")
 
 @app.route("/estoque")
 def estoque():
-    return render_template("estoque.html")
+    return render_template("https://dharllan.pythonanywhere.com/templates/estoque.html")
 
 @app.route("/relatorios")
 def relatorios():
-    return render_template("relatorios.html")
+    return render_template("https://dharllan.pythonanywhere.com/templates/relatorios.html")
 
 @app.route("/cadastrovendas")
 def cadastro_vendas():
-    return render_template("cadastro_vendas.html")
+    return render_template("https://dharllan.pythonanywhere.com/templates/cadastro_vendas.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -51,11 +51,11 @@ def login():
         for usuario in dados:
             if email and senha:
                 if usuario["email"] == email and usuario["senha"] == senha:
-                    return redirect(url_for("relatorios"))
+                    return redirect(url_for("https://dharllan.pythonanywhere.com/templates/relatorios"))
             else:
                 return "<h1>Por favor preencha todos os campos</h1>"
         return "<h1>Senha ou Usuário incorretos</h1>"
-    return render_template("tela_login.html")
+    return render_template("https://dharllan.pythonanywhere.com/templates/tela_login.html")
 
 @app.route('/cadastro', methods=["GET", "POST"])
 def cadastro():
@@ -70,7 +70,7 @@ def cadastro():
                 return "<h1>Usuário já cadastrado</h1>"
         if nome and cpf and email and dados:
             adicionar_usuario(nome, cpf, email, senha)
-            return redirect(url_for("relatorios"))
+            return redirect(url_for("https://dharllan.pythonanywhere.com/templates/relatorios"))
         else:
             return "<h1>Por favor preencha todos os campos</h1>"
-    return render_template("tela_cadastro.html")
+    return render_template("https://dharllan.pythonanywhere.com/templates/tela_cadastro.html")
