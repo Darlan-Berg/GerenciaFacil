@@ -1,181 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 * {
-box-sizing: border-box;
-font-family: Arial, Helvetica, sans-serif;
-font-weight: bold;
-}
-
-a {
+    font-family: 'Inter', sans-serif;
     text-decoration: none;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
     margin: 0;
+    padding: 0;
+    color: white;
 }
 
-.cabecalho, footer {
+/* CABECALHO BASE */
+
+header {
+    background-color: #567ebb;
+    height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 150px;
-    background-color: lightgray;
+    padding: 0 50px;
 }
-
-.cabecalho h1 {
-    margin-left: 40px;
-    
-}
-.cabecalho button {
-    margin-right: 40px;
+header button {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-}
-.cabecalho img {
-    width: 30px;
-    height: 30px;
-}
-
-.conteudo {
-    display: flex;
-    flex: 1; /* ocupa todo o espaço vertical disponível */
-}
-
-.navegacao {
-    padding-top: 30px;
-    width: 20%;
-    background-color: lightblue;
-    height: 62.5rem;
-}
-
-.botao {
-    display: block;
-    width: 90%;
-    height: 100px;
-    margin: auto;
-    margin-bottom: 120px;
-    border-radius: 20px;
-}
-
-.content {
-    width: 80%;
-    height: 62.5rem;
-}
-
-.cabecalho-cadastro-de-compras {
+    /* as linhas abaixo fazem com que a imagem
+    dentro do botao fique centralizada */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 6rem;
-    margin: 20px 0;
 }
-
-.cabecalho-cadastro-de-compras h1 {
-    margin-right: 2rem;
-}
-
-.cabecalho-cadastro-de-compras button {
-    width: 60px;
-    height: 60px;
+header img {
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
 }
 
-.cabecalho-cadastro-de-compras img {
-    width: 40px;
-    height: 40px;
-}
+/* BARRA DE NAVEGACAO */
 
-.container-de-cards {
+nav {
+    width: 25%;
+    height: 700px;
+    padding-top: 40px;
+    padding-left: 25px;
     display: flex;
     flex-direction: column;
-    padding: 0 30px;
+    border-right: solid black 3px;
 }
-
-.card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+nav button {
+    width: 80%;
+    height: 35px;
+    border-style: none;
     border-radius: 10px;
-    background-color: lightgray;
-    margin-bottom: 20px;
-    padding: 0 30px;
+    background-color: #567ebb;
+    /* o margin auto a direita e a esquerda dos botoes
+    faz com que eles fiquem justificados */
+    margin: 40px 0;
+    box-shadow: 5px 5px 3px black;
 }
 
-.card p {
-    display: inline;
-    font-size: 1rem;
-}
 
-.card img {
-    width: 20px;
-    height: 20px;
-}
 
-footer h3 {
-    margin: auto;
-}
-
-.cabecalho-relatorios {
+.barra-navegacao-e-conteudo {
     display: flex;
-    flex-direction: row;
+    /* adicionar estilizacao para fazer com que a barra de navegacao
+    e o conteudo das paginas tenham uma altura minima mas que possa aumentar
+    de acordo com o acrescimo de conteudos */
+}
+
+footer {
+    background-color: #567ebb;
     height: 100px;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 25px;
-    margin: 30px 30px;
-}
-
-.valores {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 150px;
-    margin: 30px 30px;
-}
-
-.valores div, .conteudo-relatorios div {
-    height: 100%;
-    width: 30%;
-    border: solid black 2px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 20px;
-    background-color: lightgray;
+    align-items: center;
 }
 
-.conteudo-relatorios div {
-    height: 500px;
-    margin: 15px 30px;
+main {
+    width: 100%;
+    padding: 30px;
 }
 
-.conteudo-relatorios {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 30px;
-    
+.cabecalho-inferior {
+    justify-content: center;
+    box-shadow: 5px 5px 3px black;
+    border-radius: 10px;
 }
 
-.cabecalho-produtos {
-    display: flex; 
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-table {
-            width: 100%;
-            border-collapse: collapse;
-}
-
-th, td {
-    border: 2px solid black;
-    padding: 8px;
-    text-align: center;
-}
-
-tr:nth-child(even) {
-    background-color: lightgray;
+.cabecalho-inferior button {
+    margin: 0 auto;
 }

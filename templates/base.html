@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
+    {% block links_css %}
+    {% endblock %}
+    <title> {% block title %} GerenciaFácil {% endblock %} </title>
+</head>
+
+<body>
+    <!-- cabecalho -->
+    <header>
+        <h1> <a href="/">GerenciaFácil</a> </h1> 
+        <button> <img src="https://img.icons8.com/?size=100&id=15277&format=png&color=000000" alt="botão do usuário"> </button>
+    </header>
+
+    <div class="barra-navegacao-e-conteudo">
+        <!-- barra de navegacao -->
+        <nav>
+            <a href="/dashboard"> <button type="button"> DASHBOARD </button> </a>
+            <a href="/cadastro-compras"> <button type="button"> COMPRAS </button> </a>
+            <a href="/cadastro-vendas"> <button type="button"> VENDAS </button> </a>
+            <a href="/estoque"> <button type="button"> ESTOQUE </button> </a>
+        </nav>
+
+        <!-- os conteudos de cada pagina estarao aqui dentro -->
+        {% block content %}
+
+        {% endblock %}
+    </div>
+
+    <!-- rodape -->
+    <footer>
+        <h3> 2024 Copyright Grupo Fênix</h3>
+    </footer>
+</body>
