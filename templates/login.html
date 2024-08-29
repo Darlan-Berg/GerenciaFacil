@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="https://dharllan.pythonanywhere.com/static/main.css">
+    <link rel="stylesheet" href="/static/cadastrologin.css">
 </head>
 <body>
     <div class="page">
@@ -20,6 +20,30 @@
             <input type="submit" value="Acessar" class="btn" />
         </form>
     </div>
-    
 </body>
-</html>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script> <!--Importa recursos do Firebase para serem usados na aplicação-->
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script> <!--Importa recursos do Firebase para serem usados na autenticação de usuários-->
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyA4yNNN3lfaYb3pYtB_TICAEaTv1Su4hcM",
+      authDomain: "gerenciafacil-805ba.firebaseapp.com",
+      projectId: "gerenciafacil-805ba",
+      storageBucket: "gerenciafacil-805ba.appspot.com",
+      messagingSenderId: "955132363518",
+      appId: "1:955132363518:web:a5443757d886a7b3671baf"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    app.auth().signInWithEmailAndPassword
+    
+
+    
+  </script>
