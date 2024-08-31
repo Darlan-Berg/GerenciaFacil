@@ -5,21 +5,62 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="https://dharllan.pythonanywhere.com/static/main.css">
+    <link rel="stylesheet" href="/static/cadastrologin.css">    
 </head>
-<body>
-    <div class="page">
-        <form action="https://dharllan.pythonanywhere.com/login" method="POST" class="formLogin">
-            <h1>Login</h1>
-            <p>Digite os seus dados de acesso nos campos abaixo.</p>
-            <label for="email">E-mail</label>
-            <input name="email" type="email" placeholder="Digite seu e-mail" autofocus="true" required/>
-            <label for="password">Senha</label>
-            <input name="senha" type="password" placeholder="Digite sua senha" required/>
-            <a href="https://dharllan.pythonanywhere.com/cadastro">Não possui uma conta? Cadastre-se!</a>
-            <input type="submit" value="Acessar" class="btn" />
-        </form>
-    </div>
-    
-</body>
-</html>
+    <body>
+        <div class="page">
+            <form  method="POST" class="formLogin">
+                <h1>Login</h1>
+                <p>Digite os seus dados de acesso nos campos abaixo.</p>
+                <label for="email">E-mail</label>
+                <input id="email" name="email" type="email" placeholder="Digite seu e-mail" autofocus="true" required/>
+                <label for="password">Senha</label>
+                <input id="senha" name="senha" type="password" placeholder="Digite sua senha" required/>
+                <a href="https://dharllan.pythonanywhere.com/cadastro">Não possui uma conta? Cadastre-se!</a>
+                <a href="/recuperar-senha">Esqueci a senha</a>
+                <input type="button" value="Acessar" class="btn" id="botao" />
+            </form>
+        </div>
+    </body>
+<script type="module" src="/static/index.js"></script>
+<script type="module">
+        // Importando as funções necessárias
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+
+// Configuração do Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyA4yNNN3lfaYb3pYtB_TICAEaTv1Su4hcM",
+    authDomain: "gerenciafacil-805ba.firebaseapp.com",
+    projectId: "gerenciafacil-805ba",
+    storageBucket: "gerenciafacil-805ba.appspot.com",
+    messagingSenderId: "955132363518",
+    appId: "1:955132363518:web:a5443757d886a7b3671baf"
+};
+
+// Inicializando o Firebase
+const app = initializeApp(firebaseConfig);
+
+// Pegando uma referência para o serviço de autenticação
+const auth = getAuth(app);
+
+        // Logar com email e senha
+        function login() {
+            signInWithEmailAndPassword(auth, document.getElementById("email").value, document.getElementById("senha").value)
+                .then((userCredential) => {
+                    // Logado 
+                    const usuario = userCredential.user;
+                    console.log("Deu certo", usuario);
+                    window.location.href = '/dashboard'
+                })
+                .catch((error) => {
+                    const codigoErro = error.code;
+                    const mensagemErro = error.message;
+                    console.error("Erro ao fazer login:", codigoErro, mensagemErro);
+                    window.alert("Usuário ou senha incorretos")
+                });
+        }
+        // Faz com que, ao ser clicado, o botão de acesso irá chamar a função login()
+        document.getElementById("botao").addEventListener("click", login)
+    </script>
+</html> 

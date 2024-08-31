@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperação de Senha</title>
+    <link rel="stylesheet" href="/static/cadastrologin.css">
+</head>
+<body>
+    <div class="page">  
+        <form method="POST" class="formLogin">
+            <h1>Recuperar Senha</h1>
+            <p>Digite o seu email para a recuparação.</p>
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="Digite seu email" autofocus="true" required/>
+            <input type="button" value="Enviar" class="btn" id="botaoEnviar"/>
+        </form>
+    </div>
+    
+</body>
+<script type="module" src="/static/index.js"></script>
+<script type="module">
+        // Importando as funções necessárias
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+
+// Configuração do Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyA4yNNN3lfaYb3pYtB_TICAEaTv1Su4hcM",
+    authDomain: "gerenciafacil-805ba.firebaseapp.com",
+    projectId: "gerenciafacil-805ba",
+    storageBucket: "gerenciafacil-805ba.appspot.com",
+    messagingSenderId: "955132363518",
+    appId: "1:955132363518:web:a5443757d886a7b3671baf"
+};
+
+// Inicializando o Firebase
+const app = initializeApp(firebaseConfig);
+
+// Pegando uma referência para o serviço de autenticação
+const auth = getAuth(app);
+
+        // Recuperar senha
+        function recuperar_senha() {
+            sendPasswordResetEmail(auth, document.getElementById("email").value)
+                .then((response) => {
+                    window.alert("Email enviado com sucesso")
+                })
+                .catch((error) => {
+                    window.alert("Email inválido")
+                });
+        }
+        // Faz com que, ao ser clicado, o botão de recuperar senha irá chamar a função recuperar_senha()
+        document.getElementById("botaoEnviar").addEventListener("click", recuperar_senha)
+    </script>
+</html>

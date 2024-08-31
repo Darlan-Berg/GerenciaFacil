@@ -43,21 +43,21 @@ def cadastro_vendas():
 def cadastro_compras():
     return render_template("compras.html")
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/login", methods=["GET"])
 def login():
-    if request.method == "POST":
+    '''if request.method == "POST":
         email = request.args.get("email")
         senha = request.args.get("senha")
         dados = ler_dados()
         for usuario in dados:
             if usuario["email"] == email and usuario["senha"] == senha:
                 return redirect(url_for("/dashboard"))
-        return "<h1>Senha ou Usuário incorretos</h1>"
+        return "<h1>Senha ou Usuário incorretos</h1>"'''
     return render_template("login.html")
 
 @app.route('/cadastro', methods=["GET", "POST"])
 def cadastro():
-    if request.method == "POST":
+    '''if request.method == "POST":
         nome = request.args.get("nome")
         cpf = request.args.get("cpf")
         email = request.args.get("email")
@@ -67,5 +67,9 @@ def cadastro():
             if usuario["email"] == email:
                 return "<h1>Usuário já cadastrado</h1>"
         adicionar_usuario(nome, cpf, email, senha)
-        return redirect(url_for("/login"))
+        return redirect(url_for("/login"))'''
     return render_template("cadastro_usuarios.html")
+
+@app.route("/recuperar-senha")
+def recuperar_senha():
+    return render_template("recuperar_senha.html")
