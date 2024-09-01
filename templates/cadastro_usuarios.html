@@ -52,10 +52,17 @@ const auth = getAuth(app);
                     window.location.href = '/login'
                 })
                 .catch((error) => {
+                    if (document.getElementById("senha").value.length < 6) {
+                        const codigoErro = error.code;
+                        const mensagemErro = error.message;
+                        console.error("Erro ao fazer login:", codigoErro, mensagemErro);
+                        window.alert("A senha deve ter no mínimo 6 caractéres")
+                    } else {
                     const codigoErro = error.code;
                     const mensagemErro = error.message;
                     console.error("Erro ao fazer login:", codigoErro, mensagemErro);
                     window.alert("O email informado já está sendo utilizado")
+                    }
                 });
         }
         // Faz com que, ao ser clicado, o botão de acesso irá chamar a função login()
