@@ -27,50 +27,49 @@ def adicionar_usuario(nome, cpf, email, senha):
         json.dump(novos_dados, dados, indent=4)
 
 @app.route("/")
+@app.route("/dashboard")
 def main():
-    return render_template("https://dharllan.pythonanywhere.com/index.html")
+    return render_template("dashboard.html")
 
 @app.route("/estoque")
 def estoque():
     return render_template("estoque.html")
 
-@app.route("/relatorios")
-def relatorios():
-    return render_template("relatorios.html")
-
-@app.route("/cadastrovendas")
+@app.route("/cadastro-vendas")
 def cadastro_vendas():
     return render_template("cadastro_vendas.html")
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/cadastro-compras")
+def cadastro_compras():
+    return render_template("compras.html")
+
+@app.route("/login", methods=["GET"])
 def login():
-    if request.method == "POST":
-        email = request.form["email"]
-        senha = request.form["senha"]
+    '''if request.method == "POST":
+        email = request.args.get("email")
+        senha = request.args.get("senha")
         dados = ler_dados()
         for usuario in dados:
-            if email and senha:
-                if usuario["email"] == email and usuario["senha"] == senha:
-                    return redirect(url_for("relatorios"))
-            else:
-                return "<h1>Por favor preencha todos os campos</h1>"
-        return "<h1>Senha ou Usuário incorretos</h1>"
-    return render_template("tela_login.html")
+            if usuario["email"] == email and usuario["senha"] == senha:
+                return redirect(url_for("/dashboard"))
+        return "<h1>Senha ou Usuário incorretos</h1>"'''
+    return render_template("login.html")
 
 @app.route('/cadastro', methods=["GET", "POST"])
 def cadastro():
-    if request.method == "POST":
-        nome = request.form["nome"]
-        cpf = request.form["cpf"]
-        email = request.form["email"]
-        senha = request.form["senha"]
+    '''if request.method == "POST":
+        nome = request.args.get("nome")
+        cpf = request.args.get("cpf")
+        email = request.args.get("email")
+        senha = request.args.get("senha")
         dados = ler_dados()
         for usuario in dados:
             if usuario["email"] == email:
                 return "<h1>Usuário já cadastrado</h1>"
-        if nome and cpf and email and dados:
-            adicionar_usuario(nome, cpf, email, senha)
-            return redirect(url_for("relatorios"))
-        else:
-            return "<h1>Por favor preencha todos os campos</h1>"
-    return render_template("tela_cadastro.html")
+        adicionar_usuario(nome, cpf, email, senha)
+        return redirect(url_for("/login"))'''
+    return render_template("cadastro_usuarios.html")
+
+@app.route("/recuperar-senha")
+def recuperar_senha():
+    return render_template("recuperar_senha.html")

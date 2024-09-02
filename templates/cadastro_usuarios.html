@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="/static/cadastrologin.css">
+</head>
+<body>
+    <div class="page">
+        <form action="https://dharllan.pythonanywhere.com/cadastro" method="POST" class="formLogin">
+            <h1>Criar Conta</h1>
+            <p>Digite os seus dados nos campos abaixo.</p>
+            <label for="email">Nome</label>
+            <input name="nome" type="text" placeholder="Digite seu nome" autofocus="true" required/>
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" placeholder="Digite seu e-mail" required/>
+            <label for="password">Senha</label>
+            <input id="senha" name="senha" type="password" placeholder="Digite sua senha" required/>
+            <input type="button" value="Acessar" class="btn" id="botao"/>
+        </form>
+    </div>
+    
+</body>
+<script type="module" src="/static/index.js"></script>
+<script type="module">
+        // Importando as funções necessárias
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+
+// Configuração do Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyA4yNNN3lfaYb3pYtB_TICAEaTv1Su4hcM",
+    authDomain: "gerenciafacil-805ba.firebaseapp.com",
+    projectId: "gerenciafacil-805ba",
+    storageBucket: "gerenciafacil-805ba.appspot.com",
+    messagingSenderId: "955132363518",
+    appId: "1:955132363518:web:a5443757d886a7b3671baf"
+};
+
+// Inicializando o Firebase
+const app = initializeApp(firebaseConfig);
+
+// Pegando uma referência para o serviço de autenticação
+const auth = getAuth(app);
+
+        // Logar com email e senha
+        function registrar() {
+            createUserWithEmailAndPassword(auth, document.getElementById("email").value, document.getElementById("senha").value)
+                .then((response) => {
+                    window.location.href = '/login'
+                })
+                .catch((error) => {
+                    if (document.getElementById("senha").value.length < 6) {
+                        const codigoErro = error.code;
+                        const mensagemErro = error.message;
+                        console.error("Erro ao fazer login:", codigoErro, mensagemErro);
+                        window.alert("A senha deve ter no mínimo 6 caractéres")
+                    } else {
+                    const codigoErro = error.code;
+                    const mensagemErro = error.message;
+                    console.error("Erro ao fazer login:", codigoErro, mensagemErro);
+                    window.alert("O email informado já está sendo utilizado")
+                    }
+                });
+        }
+        // Faz com que, ao ser clicado, o botão de acesso irá chamar a função login()
+        document.getElementById("botao").addEventListener("click", registrar)
+    </script>
+</html>
