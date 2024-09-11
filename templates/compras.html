@@ -5,6 +5,17 @@
 
 {% block title %} Cadastro de Compras {% endblock %}
 
+{% block style_scripts %}
+<style>
+* {
+    color: black;
+}
+</style>
+<script>
+    
+</script>
+{% endblock %}
+
 {% block content %}
 
 <main>
@@ -16,6 +27,46 @@
             </button>
         </div>
     </header>
+
+<div class="modal"> 
+    <form action="/cadastro-compras">
+        <h2>Preencha os dados do produto comprado:</h2>
+        
+        <div class="secao-form">
+            <label for="nome_produto">Nome:</label>
+            <input type="text" name="nome_produto" id="nome_produto" required>
+        </div>
+
+        <div class="secao-form">
+            <label for="marca">Marca:</label>
+            <input type="text" name="marca" id="marca" required>
+        </div>
+
+        <div class="secao-form">
+            <label for="preco">Valor Unitário:</label>
+            <input type="number" name="preco" id="preco" required>
+        </div>
+
+        <div class="secao-form">
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" name="quantidade" id="quantidade" required>
+        </div>
+
+        <div class="secao-form">
+            <label for="data_compra">Data de Compra:</label>
+            <input type="date" name="data_compra" id="data_compra" required>
+        </div>
+
+        <div class="secao-form">
+            <label for="data_validade">Data de Validade:</label>
+            <input type="date" name="data_validade" id="data_validade" required>
+        </div>
+
+        <button type="button">Cancelar</button>
+        <button type="submit">Confirmar</button>
+    </form>
+</div>
+
 </main>
 
 {% endblock %}
