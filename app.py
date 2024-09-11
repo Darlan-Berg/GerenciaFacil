@@ -39,9 +39,21 @@ def estoque():
 def cadastro_vendas():
     return render_template("cadastro_vendas.html")
 
-@app.route("/cadastro-compras")
+@app.route("/cadastro-compras", methods=["GET", "POST"])
 def cadastro_compras():
-    return render_template("compras.html")
+    if request.method == "GET":
+        return render_template("compras.html")
+    
+    elif request.method == "POST":
+        nome = request.form.get("nome_produto")
+        marca = request.form.get("marca")
+        preco = request.form.get("preco")
+        quantidade = request.form.get("quantidade")
+        data_compra = request.form.get("data_compra")
+        data_validade = request.form.get("data_validade")
+
+        # o retorno da funcao ainda nao esta funcionando adequadamente
+        return f"<html>{nome},{marca},{preco},{quantidade},{data_compra},{data_validade}<html>"
 
 @app.route("/login", methods=["GET"])
 def login():
