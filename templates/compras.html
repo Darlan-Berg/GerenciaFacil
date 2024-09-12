@@ -7,9 +7,8 @@
 
 {% block style_scripts %}
 <style>
-* {
-    color: black;
-}
+
+
 </style>
 <script>
     
@@ -26,45 +25,140 @@
                 <img src="https://img.icons8.com/ios/50/plus-key.png" alt="botao de adição">
             </button>
         </div>
+        <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #023047
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    
+}
+
+.formLogin {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 7px;
+    padding: 40px;
+    box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
+    gap: 5px
+}
+
+.areaLogin img {
+    width: 420px;
+}
+
+.formLogin h1 {
+    padding: 0;
+    margin: 0;
+    font-weight: 500;
+    font-size: 2.3em;
+}
+
+.formLogin p {
+    display: inline-block;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.formLogin input {
+    padding: 15px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    margin-top: 5px;
+    border-radius: 4px;
+    transition: all linear 160ms;
+    outline: none;
+}
+
+
+.formLogin input:focus {
+    border: 1px solid #2b4c7e;
+}
+
+.formLogin label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.formLogin a {
+    display: inline-block;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #555;
+    transition: all linear 160ms;
+}
+
+.formLogin a:hover {
+    color: #1f1f20;
+}
+
+.btn {
+    background-color: #2b4c7e;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    border: none !important;
+    transition: all linear 160ms;
+    cursor: pointer;
+    margin: 0 !important;
+
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    background-color: #2b4c7e;
+}
+
+        </style>
     </header>
 
 <div class="modal"> 
-    <form action="/cadastro-compras">
-        <h2>Preencha os dados do produto comprado:</h2>
-        
-        <div class="secao-form">
-            <label for="nome_produto">Nome:</label>
-            <input type="text" name="nome_produto" id="nome_produto" required>
-        </div>
+    <div class="page">
+        <form  method="POST" class="formLogin">
+            <h1>Cadastro de Compra</h1>
+            <p>Digite os dados da compra nos campos abaixo.</p>
+            <div>
+                <div>
+                    <label for="nome">Nome do Produto</label>
+                    <input id="nome" name="nome" type="nome" autofocus="true" required/>
 
-        <div class="secao-form">
-            <label for="marca">Marca:</label>
-            <input type="text" name="marca" id="marca" required>
-        </div>
+                    <label for="marca">arca</label>
+                    <input id="marca" name="marca" type="marca" required/>
 
-        <div class="secao-form">
-            <label for="preco">Valor Unitário:</label>
-            <input type="number" name="preco" id="preco" required>
-        </div>
+                    <label for="valor">Valor Unitário</label>
+                    <input id="valor" name="valor" type="valor" required/>
+                </div>
+                <div>
+                    <label for="quantidade">Quantidade</label>
+                    <input id="quantidade" name="quantidade" type="quantidade" required/>
 
-        <div class="secao-form">
-            <label for="quantidade">Quantidade:</label>
-            <input type="number" name="quantidade" id="quantidade" required>
-        </div>
+                    <label for="data-compra">Data da Compra</label>
+                    <input id="data-compra" name="data-compra" type="data-compra" required/>
 
-        <div class="secao-form">
-            <label for="data_compra">Data de Compra:</label>
-            <input type="date" name="data_compra" id="data_compra" required>
-        </div>
+                    <label for="data-validade">Data da Validade</label>
+                    <input id="data-validade" name="data-validade" type="data-validade" required/>
+                </div>
+            </div>
 
-        <div class="secao-form">
-            <label for="data_validade">Data de Validade:</label>
-            <input type="date" name="data_validade" id="data_validade" required>
-        </div>
-
-        <button type="button">Cancelar</button>
-        <button type="submit">Confirmar</button>
-    </form>
+            <a href="https://dharllan.pythonanywhere.com/cadastro">Não possui uma conta? Cadastre-se!</a>
+            <a href="/recuperar-marca">Esqueci a marca</a>
+            <input type="button" value="Acessar" class="btn" id="botao" />
+        </form>
+    </div>
+</body>
 </div>
 
 </main>
