@@ -47,13 +47,22 @@ def cadastro_compras():
     elif request.method == "POST":
         nome = request.form.get("nome_produto")
         marca = request.form.get("marca")
+        valor = request.form.get("valor")
         preco = request.form.get("preco")
         quantidade = request.form.get("quantidade")
-        data_compra = request.form.get("data_compra")
-        data_validade = request.form.get("data_validade")
+        data_compra = request.form.get("data-compra")
+        data_validade = request.form.get("data-validade")
 
-        # o retorno da funcao ainda nao esta funcionando adequadamente
-        return f"<html>{nome},{marca},{preco},{quantidade},{data_compra},{data_validade}<html>"
+        # verificar validade das informacoes do formulario
+        try:
+            valor = float(valor)
+            preco = float(preco)
+            quantidade = int(quantidade)
+            ano_comp, mes_comp, dia_comp = int(data_compra[0,4]), int(data_compra[5,7]), int(data_compra[8,])
+            ano_valid, mes_valid, dia_valid = int(data_validade[0,4]), int(data_validade[5,7]), int(data_validade[8,])
+            return f"<h1>ano_comp: {ano_comp},\nmes_comp: {mes_comp},\ndia_comp: {dia_comp}</h1>"
+        except:
+            return "<h1>Verifique a tipagem das informações fornecidas no formulário!</h1>"
 
 @app.route("/login", methods=["GET"])
 def login():
