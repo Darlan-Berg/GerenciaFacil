@@ -154,45 +154,81 @@ body {
     background-color: #2b4c7e;
 }
 
+.card {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    row-gap: 20px;
+    margin-top: 10px;
+    padding: 8px;
+    background-color: #2b4c7e;
+    border-radius: 10px;
+}
         </style>
     </header>
 
-<div class="modal"> 
-    <div class="page">
-        <form  action="/cadastro-compras" method="POST" class="form-compras">
-            <h1>Cadastro de Compra</h1>
-            <p>Digite os dados da compra nos campos abaixo:</p>
-            <div class="camposForm">
+    <div class="modal"> 
+        <div class="page">
+            <form  action="/cadastro-compras" method="POST" class="form-compras">
+                <h1>Cadastro de Compra</h1>
+                <p>Digite os dados da compra nos campos abaixo:</p>
+                <div class="camposForm">
+                    
+                    <label for="nome">Nome do Produto</label>
+                    <input id="nome_produto" name="nome_produto" type="text" autofocus="true" required/>
+    
+                    <label for="marca">Marca</label>
+                    <input id="marca" name="marca" type="text" required/>
+    
+                    <label for="valor">Valor Unitário</label>
+                    <input id="valor" name="valor" type="number" required/>
+    
+                    <label for="preco">Preço Unitário</label>
+                    <input id="preco" name="preco" type="number" required/>
                 
-                <label for="nome">Nome do Produto</label>
-                <input id="nome_produto" name="nome_produto" type="text" autofocus="true" required/>
-
-                <label for="marca">Marca</label>
-                <input id="marca" name="marca" type="text" required/>
-
-                <label for="valor">Valor Unitário</label>
-                <input id="valor" name="valor" type="number" required/>
-
-                <label for="preco">Preço Unitário</label>
-                <input id="preco" name="preco" type="number" required/>
-            
-                <label for="quantidade">Quantidade</label>
-                <input id="quantidade" name="quantidade" type="number" required/>
-
-                <label for="data-compra">Data da Compra</label>
-                <input id="data-compra" name="data-compra" type="date" required/>
-
-                <label for="data-validade">Data da Validade</label>
-                <input id="data-validade" name="data-validade" type="date" required/>
-            </div>
-
-            <input type="submit" value="Confirmar" class="btn" id="botao-confirmar"/>
-            <input type="button" value="Cancelar" class="btn" id="botao-cancelar" onclick="fecharModal()"/>
-        </form>
+                    <label for="quantidade">Quantidade</label>
+                    <input id="quantidade" name="quantidade" type="number" required/>
+    
+                    <label for="data-compra">Data da Compra</label>
+                    <input id="data-compra" name="data-compra" type="date" required/>
+    
+                    <label for="data-validade">Data da Validade</label>
+                    <input id="data-validade" name="data-validade" type="date" required/>
+                </div>
+    
+                <input type="submit" value="Confirmar" class="btn" id="botao-confirmar"/>
+                <input type="button" value="Cancelar" class="btn" id="botao-cancelar" onclick="fecharModal()"/>
+            </form>
+        </div>
     </div>
-</body>
-</div>
 
+    <!-- desenhar cartoes na pagina -->
+    {% if lista_produtos %}
+        {% for produto in lista_produtos %}
+        <div class="card">
+            <div class="informacao-produto">
+                Nome: {{ produto["nome"] }}
+            </div>
+            <div class="informacao-produto">
+                Marca: {{ produto["marca"] }}
+            </div>
+            <div class="informacao-produto">
+                Valor: {{ produto["valor"] }}
+            </div>
+            <div class="informacao-produto">
+                Preço: {{ produto["preco"] }}
+            </div>
+            <div class="informacao-produto">
+                Quantidade: {{ produto["quantidade"] }}
+            </div>
+            <div class="informacao-produto">
+                Data da Compra: {{ produto["data_compra"] }}
+            </div>
+            <div class="informacao-produto">
+                Data de Validade: {{ produto["data_validade"] }}
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
 </main>
 
 {% endblock %}
