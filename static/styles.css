@@ -77,11 +77,12 @@ footer {
 main {
     width: 100%;
     padding: 30px;
+    background: #E4E9F7;
 }
 
 .cabecalho-inferior {
     justify-content: center;
-    box-shadow: 5px 5px 3px black;
+    margin-bottom: 15px;
     border-radius: 10px;
 }
 

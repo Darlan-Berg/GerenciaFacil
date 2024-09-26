@@ -7,6 +7,7 @@ if __name__ == "__main__":
     app.run(debug=True)
 
 caminho_dados = "dados.json"
+caminho_estoque = "estoque.json"
 
 def ler_dados():
     with open(caminho_dados, "r") as dados:
@@ -42,18 +43,40 @@ def cadastro_vendas():
 @app.route("/cadastro-compras", methods=["GET", "POST"])
 def cadastro_compras():
     if request.method == "GET":
-        return render_template("compras.html")
+        with open(caminho_estoque, "r", encoding="utf-8") as arq_json:
+            estoque = json.load(arq_json)
+        return render_template("compras.html", lista_produtos=estoque)
     
-    elif request.method == "POST":
-        nome = request.form.get("nome_produto")
-        marca = request.form.get("marca")
-        preco = request.form.get("preco")
-        quantidade = request.form.get("quantidade")
-        data_compra = request.form.get("data_compra")
-        data_validade = request.form.get("data_validade")
+    nome = request.form.get("nome_produto")
+    marca = request.form.get("marca")
+    valor = request.form.get("valor")
+    preco = request.form.get("preco")
+    quantidade = request.form.get("quantidade")
+    data_compra = request.form.get("data-compra")
+    data_validade = request.form.get("data-validade")
+    
+    # ler arquivo estoque.json
+    with open(caminho_estoque, "r", encoding="utf-8") as arq_json:
+        estoque = json.load(arq_json)
+    
+    # sobrescrever estoque.json
+    with open(caminho_estoque, "w", encoding="utf-8") as arq_json:
+        novo_produto = {
+            "nome": nome,
+            "marca": marca,
+            "valor": valor,
+            "preco": preco,
+            "quantidade": quantidade,
+            "data_compra": data_compra,
+            "data_validade": data_validade
+        }
+        estoque_atualizado = estoque
+        estoque_atualizado.append(novo_produto)
 
-        # o retorno da funcao ainda nao esta funcionando adequadamente
-        return f"<html>{nome},{marca},{preco},{quantidade},{data_compra},{data_validade}<html>"
+        # sobrescrever estoque.json com as informacoes atuais
+        json.dump(estoque_atualizado, arq_json, indent=4)
+
+        return redirect(url_for("cadastro_compras"))
 
 @app.route("/login", methods=["GET"])
 def login():
