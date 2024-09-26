@@ -108,3 +108,8 @@ def cadastro():
 @app.route("/recuperar-senha")
 def recuperar_senha():
     return render_template("recuperar_senha.html")
+
+def ler_estoque():
+    with open(caminho_estoque, "r", encoding="utf-8") as estoque_json:
+        estoque = json.load(estoque)
+        return estoque
