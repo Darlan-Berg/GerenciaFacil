@@ -1,0 +1,16 @@
+[
+    {
+        "cod_compra": "123",
+        "data": "12-11-23",
+        "produto A": "objeto_de_Produtos",
+        "produto B": "objeto_de_Produtos",
+        "produto C": "objeto_de_Produtos"
+    },
+    {
+        "cod_compra": "321",
+        "data": "12-11-23",
+        "produto A": "objeto_de_Produtos",
+        "produto B": "objeto_de_Produtos",
+        "produto C": "objeto_de_Produtos"
+    }
+]
