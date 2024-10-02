@@ -12,5 +12,14 @@
         "produto A": "objeto_de_Produtos",
         "produto B": "objeto_de_Produtos",
         "produto C": "objeto_de_Produtos"
+    },
+    {
+        "nome": "creatina",
+        "marca": "eat clean",
+        "valor": null,
+        "preco": null,
+        "quantidade": "1",
+        "data_compra": null,
+        "data_validade": "2024-10-23"
     }
 ]
