@@ -6,8 +6,8 @@ app = Flask(__name__)
 if __name__ == "__main__":
     app.run(debug=True)
 
-caminho_dados = "dados.json"
-caminho_estoque = "estoque.json"
+caminho_dados = "usuarios.json"
+caminho_historico_compras = "historico_compras.json"
 
 def ler_dados():
     with open(caminho_dados, "r") as dados:
@@ -43,9 +43,9 @@ def cadastro_vendas():
 @app.route("/cadastro-compras", methods=["GET", "POST"])
 def cadastro_compras():
     if request.method == "GET":
-        with open(caminho_estoque, "r", encoding="utf-8") as arq_json:
-            estoque = json.load(arq_json)
-        return render_template("compras.html", lista_produtos=estoque)
+        with open(caminho_historico_compras, "r", encoding="utf-8") as arq_json:
+            historico_compras = json.load(arq_json)
+        return render_template("compras.html", lista_produtos=historico_compras)
 
     nome = request.form.get("nome_produto")
     marca = request.form.get("marca")
@@ -56,11 +56,11 @@ def cadastro_compras():
     data_validade = request.form.get("data-validade")
 
     # ler arquivo estoque.json
-    with open(caminho_estoque, "r", encoding="utf-8") as arq_json:
+    with open(caminho_historico_compras, "r", encoding="utf-8") as arq_json:
         estoque = json.load(arq_json)
 
     # sobrescrever estoque.json
-    with open(caminho_estoque, "w", encoding="utf-8") as arq_json:
+    with open(caminho_historico_compras, "w", encoding="utf-8") as arq_json:
         novo_produto = {
             "nome": nome,
             "marca": marca,
@@ -76,7 +76,7 @@ def cadastro_compras():
         # sobrescrever estoque.json com as informacoes atuais
         json.dump(estoque_atualizado, arq_json, indent=4)
 
-    return render_template("compras.html", lista_produtos = estoque_atualizado)
+        return redirect(url_for("cadastro_compras"))
 
 @app.route("/login", methods=["GET"])
 def login():
@@ -108,3 +108,8 @@ def cadastro():
 @app.route("/recuperar-senha")
 def recuperar_senha():
     return render_template("recuperar_senha.html")
+
+def ler_estoque():
+    with open(caminho_historico_compras, "r", encoding="utf-8") as estoque_json:
+        estoque = json.load(estoque)
+        return estoque
