@@ -7,6 +7,7 @@ if __name__ == "__main__":
     app.run(debug=True)
 
 caminho_dados = "dados.json"
+caminho_estoque = "estoque.json"
 
 def ler_dados():
     with open(caminho_dados, "r") as dados:
@@ -42,27 +43,40 @@ def cadastro_vendas():
 @app.route("/cadastro-compras", methods=["GET", "POST"])
 def cadastro_compras():
     if request.method == "GET":
-        return render_template("compras.html")
-    
-    elif request.method == "POST":
-        nome = request.form.get("nome_produto")
-        marca = request.form.get("marca")
-        valor = request.form.get("valor")
-        preco = request.form.get("preco")
-        quantidade = request.form.get("quantidade")
-        data_compra = request.form.get("data-compra")
-        data_validade = request.form.get("data-validade")
+        with open(caminho_estoque, "r", encoding="utf-8") as arq_json:
+            estoque = json.load(arq_json)
+        return render_template("compras.html", lista_produtos=estoque)
 
-        # verificar validade das informacoes do formulario
-        try:
-            valor = float(valor)
-            preco = float(preco)
-            quantidade = int(quantidade)
-            ano_comp, mes_comp, dia_comp = int(data_compra[0,4]), int(data_compra[5,7]), int(data_compra[8,])
-            ano_valid, mes_valid, dia_valid = int(data_validade[0,4]), int(data_validade[5,7]), int(data_validade[8,])
-            return f"<h1>ano_comp: {ano_comp},\nmes_comp: {mes_comp},\ndia_comp: {dia_comp}</h1>"
-        except:
-            return "<h1>Verifique a tipagem das informações fornecidas no formulário!</h1>"
+    nome = request.form.get("nome_produto")
+    marca = request.form.get("marca")
+    valor = request.form.get("valor")
+    preco = request.form.get("preco")
+    quantidade = request.form.get("quantidade")
+    data_compra = request.form.get("data-compra")
+    data_validade = request.form.get("data-validade")
+
+    # ler arquivo estoque.json
+    with open(caminho_estoque, "r", encoding="utf-8") as arq_json:
+        estoque = json.load(arq_json)
+
+    # sobrescrever estoque.json
+    with open(caminho_estoque, "w", encoding="utf-8") as arq_json:
+        novo_produto = {
+            "nome": nome,
+            "marca": marca,
+            "valor": valor,
+            "preco": preco,
+            "quantidade": quantidade,
+            "data_compra": data_compra,
+            "data_validade": data_validade
+        }
+        estoque_atualizado = estoque
+        estoque_atualizado.append(novo_produto)
+
+        # sobrescrever estoque.json com as informacoes atuais
+        json.dump(estoque_atualizado, arq_json, indent=4)
+
+    return render_template("compras.html", lista_produtos = estoque_atualizado)
 
 @app.route("/login", methods=["GET"])
 def login():
