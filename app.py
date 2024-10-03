@@ -6,8 +6,8 @@ app = Flask(__name__)
 if __name__ == "__main__":
     app.run(debug=True)
 
-caminho_dados = "usuarios.json"
-caminho_historico_compras = "historico_compras.json"
+caminho_dados = "GerenciaFacil/usuarios.json"
+caminho_historico_compras = "GerenciaFacil/historico_compras.json"
 
 def ler_dados():
     with open(caminho_dados, "r") as dados:
