@@ -1,13 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for
 import json
+import os
 
 app = Flask(__name__)
 
 if __name__ == "__main__":
     app.run(debug=True)
 
-caminho_dados = "GerenciaFacil/usuarios.json"
-caminho_historico_compras = "GerenciaFacil/historico_compras.json"
+caminho_dados =  os.path.join(os.getcwd(), "usuarios.json")
+caminho_historico_compras = os.path.join(os.getcwd(), "historico_compras.json")
 
 def ler_dados():
     with open(caminho_dados, "r") as dados:
