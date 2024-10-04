@@ -7,26 +7,7 @@ app = Flask(__name__)
 if __name__ == "__main__":
     app.run(debug=True)
 
-caminho_dados =  os.path.join(os.path.dirname(os.path.abspath(__file__)), "usuarios.json")
 caminho_historico_compras = os.path.join(os.path.dirname(os.path.abspath(__file__)), "historico_compras.json")
-
-def ler_dados():
-    with open(caminho_dados, "r") as dados:
-        informacoes_usuarios = json.load(dados)
-        return informacoes_usuarios
-
-def adicionar_usuario(nome, cpf, email, senha):
-    novo_usuario = {
-        "nome": nome,
-        "cpf": cpf,
-        "email": email,
-        "senha": senha
-    }
-    novos_dados = ler_dados()
-    novos_dados.append(novo_usuario)
-
-    with open(caminho_dados, "w") as dados:
-        json.dump(novos_dados, dados, indent=4)
 
 @app.route("/")
 @app.route("/dashboard")
@@ -81,36 +62,12 @@ def cadastro_compras():
 
 @app.route("/login", methods=["GET"])
 def login():
-    '''if request.method == "POST":
-        email = request.args.get("email")
-        senha = request.args.get("senha")
-        dados = ler_dados()
-        for usuario in dados:
-            if usuario["email"] == email and usuario["senha"] == senha:
-                return redirect(url_for("/dashboard"))
-        return "<h1>Senha ou Usuário incorretos</h1>"'''
     return render_template("login.html")
 
 @app.route('/cadastro', methods=["GET", "POST"])
 def cadastro():
-    '''if request.method == "POST":
-        nome = request.args.get("nome")
-        cpf = request.args.get("cpf")
-        email = request.args.get("email")
-        senha = request.args.get("senha")
-        dados = ler_dados()
-        for usuario in dados:
-            if usuario["email"] == email:
-                return "<h1>Usuário já cadastrado</h1>"
-        adicionar_usuario(nome, cpf, email, senha)
-        return redirect(url_for("/login"))'''
     return render_template("cadastro_usuarios.html")
 
 @app.route("/recuperar-senha")
 def recuperar_senha():
     return render_template("recuperar_senha.html")
-
-def ler_estoque():
-    with open(caminho_historico_compras, "r", encoding="utf-8") as estoque_json:
-        estoque = json.load(estoque)
-        return estoque
