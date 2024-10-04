@@ -22,9 +22,11 @@
             </form>
         </div>
     </body>
+
 <script type="module" src="../static/index.js"></script>
 <script type="module">
-        // Importando as funções necessárias
+
+// Importando as funções necessárias
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
@@ -63,4 +65,5 @@ const auth = getAuth(app);
         // Faz com que, ao ser clicado, o botão de acesso irá chamar a função login()
         document.getElementById("botao").addEventListener("click", login)
     </script>
+    
 </html> 
