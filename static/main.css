@@ -50,7 +50,6 @@ body {
     padding: 15px;
     font-size: 14px;
     border: 1px solid #ccc;
-    margin-bottom: 20px;
     margin-top: 5px;
     border-radius: 4px;
     transition: all linear 160ms;
@@ -94,4 +93,11 @@ body {
 .btn:hover {
     transform: scale(1.05);
     background-color: #2b4c7e;
+}
+
+.span-required {
+    font-size: 10px;
+    margin-bottom: 5px;
+    color: #da1e1e;
+    display: none;
 }
