@@ -72,32 +72,35 @@
         </div>
     </div>
 
-    <!-- desenhar cartoes na pagina -->
-    {% if lista_produtos %}
-        {% for produto in lista_produtos %}
-        <div class="card">
-            <div class="informacao-produto">
-                Nome: {{ produto["nome"] }}
+    {% if lista_compras %}
+        {% for compra in lista_compras %}
+            <div class="cartao-de-compra">
+                <div class="informacoes-compra">
+                    Data: {{ compra["data"] }}
+                    ID: {{ compra["cod"] }}
+                </div>
+                <div class="container-produtos">
+                    {% for produto in compra["produtos"] %}
+                        <div class="card">
+                            <div class="informacao-produto">
+                                Nome: {{ produto["nome"] }}
+                            </div>
+                            <div class="informacao-produto">
+                                Marca: {{ produto["marca"] }}
+                            </div>
+                            <div class="informacao-produto">
+                                Valor: {{ produto["valor"] }}
+                            </div>
+                            <div class="informacao-produto">
+                                Quantidade: {{ produto["quantidade"] }}
+                            </div>
+                            <div class="informacao-produto">
+                                Data de Validade: {{ produto["data_validade"] }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="informacao-produto">
-                Marca: {{ produto["marca"] }}
-            </div>
-            <div class="informacao-produto">
-                Valor: {{ produto["valor"] }}
-            </div>
-            <div class="informacao-produto">
-                Preço: {{ produto["preco"] }}
-            </div>
-            <div class="informacao-produto">
-                Quantidade: {{ produto["quantidade"] }}
-            </div>
-            <div class="informacao-produto">
-                Data da Compra: {{ produto["data_compra"] }}
-            </div>
-            <div class="informacao-produto">
-                Data de Validade: {{ produto["data_validade"] }}
-            </div>
-        </div>
         {% endfor %}
     {% endif %}
 </main>

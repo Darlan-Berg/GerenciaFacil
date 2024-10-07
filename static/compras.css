@@ -171,3 +171,8 @@ main {
     z-index: 115;
     opacity: 0.5;
 }
+
+.cartao-de-compra {
+    background-color: gray;
+    border-radius: 10px;
+}

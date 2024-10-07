@@ -27,7 +27,7 @@ def cadastro_compras():
     if request.method == "GET":
         with open(caminho_historico_compras, "r", encoding="utf-8") as arq_json:
             historico_compras = json.load(arq_json)
-        return render_template("compras.html", lista_produtos=historico_compras)
+        return render_template("compras.html", lista_compras=historico_compras)
 
     nome = request.form.get("nome_produto")
     marca = request.form.get("marca")
