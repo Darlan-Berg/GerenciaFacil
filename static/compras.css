@@ -7,14 +7,6 @@ body {
     color: #023047
 }
 
-.modal {
-    display: none;
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 2;
-}
-
 .page {
     display: flex;
     flex-direction: column;
@@ -129,12 +121,24 @@ main {
     position: relative;
 }
 
+.modal {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, 0);
+    z-index: 120;
+}
+
 .modal-compras {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, 0);
     display: none;
-    z-index: 1;
+    z-index: 110;
     width: 600px;
     height: 600px;
     background-color: #496795;
@@ -148,4 +152,27 @@ main {
 
 .btns-modal-compras button {
     color: black;
+}
+
+#backdrop1, #backdrop2 {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: none;
+    background-color: black;
+}
+
+#backdrop1 {
+    z-index: 105;
+    opacity: 0.3;
+}
+
+#backdrop2 {
+    z-index: 115;
+    opacity: 0.5;
+}
+
+.cartao-de-compra {
+    background-color: gray;
+    border-radius: 10px;
 }

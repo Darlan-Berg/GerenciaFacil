@@ -10,13 +10,18 @@
 <script src="../static/index.js"></script>
 {% endblock %}
 
+{% block backdrops %}
+<div id="backdrop1"></div>
+<div id="backdrop2"></div>
+{% endblock %}
+
 {% block content %}
 
 <main>
     <header class="cabecalho-inferior">
         <div>
             <h3 id="btn-adicionar-compra"> Adicinar Compra </h3>
-            <button onclick="abrirModal(`.modal-compras`)">
+            <button onclick="abrirModal(`.modal-compras`, `#backdrop1`)">
                 <img src="https://img.icons8.com/ios/50/plus-key.png" alt="botao de adição">
             </button>
         </div>
@@ -47,7 +52,7 @@
                 </div>
 
                 <input type="submit" value="Confirmar" class="btn" id="botao-confirmar"/>
-                <input type="button" value="Cancelar" class="btn" id="botao-cancelar" onclick="fecharModal(`.modal`)"/>
+                <input type="button" value="Cancelar" class="btn" id="botao-cancelar" onclick="fecharModal(`.modal`, `#backdrop2`)"/>
             </form>
         </div>
     </div>
@@ -56,43 +61,46 @@
         <h1>Informe os Dados da Compra:</h1>
         <input type="date" required>
         <div>
-            <button onclick="abrirModal(`.modal`)"><img src="https://img.icons8.com/ios/50/plus-key.png" alt="botao de adição"></button>
+            <button onclick="abrirModal(`.modal`, `#backdrop2`)"><img src="https://img.icons8.com/ios/50/plus-key.png" alt="botao de adição"></button>
         </div>
 
         <div id="container-cartoes"></div>
 
         <div class="btns-modal-compras">
-            <button onclick="fecharModal(`.modal-compras`)">Cancelar</button>
+            <button onclick="fecharModal(`.modal-compras`, `#backdrop1`)">Cancelar</button>
             <button onclick="cadastrarCompra()">Confirmar</button>
         </div>
     </div>
 
-    <!-- desenhar cartoes na pagina -->
-    {% if lista_produtos %}
-        {% for produto in lista_produtos %}
-        <div class="card">
-            <div class="informacao-produto">
-                Nome: {{ produto["nome"] }}
+    {% if lista_compras %}
+        {% for compra in lista_compras %}
+            <div class="cartao-de-compra">
+                <div class="informacoes-compra">
+                    Data: {{ compra["data"] }}
+                    ID: {{ compra["cod"] }}
+                </div>
+                <div class="container-produtos">
+                    {% for produto in compra["produtos"] %}
+                        <div class="card">
+                            <div class="informacao-produto">
+                                Nome: {{ produto["nome"] }}
+                            </div>
+                            <div class="informacao-produto">
+                                Marca: {{ produto["marca"] }}
+                            </div>
+                            <div class="informacao-produto">
+                                Valor: {{ produto["valor"] }}
+                            </div>
+                            <div class="informacao-produto">
+                                Quantidade: {{ produto["quantidade"] }}
+                            </div>
+                            <div class="informacao-produto">
+                                Data de Validade: {{ produto["data_validade"] }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="informacao-produto">
-                Marca: {{ produto["marca"] }}
-            </div>
-            <div class="informacao-produto">
-                Valor: {{ produto["valor"] }}
-            </div>
-            <div class="informacao-produto">
-                Preço: {{ produto["preco"] }}
-            </div>
-            <div class="informacao-produto">
-                Quantidade: {{ produto["quantidade"] }}
-            </div>
-            <div class="informacao-produto">
-                Data da Compra: {{ produto["data_compra"] }}
-            </div>
-            <div class="informacao-produto">
-                Data de Validade: {{ produto["data_validade"] }}
-            </div>
-        </div>
         {% endfor %}
     {% endif %}
 </main>

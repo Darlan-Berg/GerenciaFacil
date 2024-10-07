@@ -1,1 +1,10 @@
-[]
+[
+    {
+        "data": "07-10-24",
+        "cod": "12345",
+        "produtos": [
+            { "nome": "macarrão", "marca": "cipan", "valor": 10, "quantidade": 5, "data_validade": "01-01-25" },
+            { "nome": "macarrão", "marca": "cipan", "valor": 10, "quantidade": 5, "data_validade": "01-01-25" }
+        ]
+    }
+]
