@@ -1,14 +1,34 @@
-function abrirModal (nomeModal) {
+function abrirModal (nomeModal, nomeBackdrop) {
+
+    ativarBackdrop(nomeBackdrop);
+
     var janelaModal = document.querySelector(nomeModal);
     if (janelaModal) {
         janelaModal.style.display = `block`;
     }
 }
 
-function fecharModal (nomeModal) {
+function fecharModal (nomeModal, nomeBackdrop) {
+    
+    desativarBackdrop(nomeBackdrop);
+
     var janelaModal = document.querySelector(nomeModal);
     if (janelaModal) {
         janelaModal.style.display = `none`;
+    }
+}
+
+function ativarBackdrop (idBackdrop) {
+    var backdrop = document.querySelector(idBackdrop)
+    if (backdrop) {
+        backdrop.style.display = `block`;
+    }
+}
+
+function desativarBackdrop (idBackdrop) {
+    var backdrop = document.querySelector(idBackdrop)
+    if (backdrop) {
+        backdrop.style.display = `none`;
     }
 }
 
@@ -38,5 +58,5 @@ function submitForm(event) {
 
     // Limpa o formulário e fecha a segunda modal
     document.getElementById('infoForm').reset();
-    fecharModal(`.modal`);
+    fecharModal(`.modal`, `#backdrop2`);
 }
