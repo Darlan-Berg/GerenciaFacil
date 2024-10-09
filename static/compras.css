@@ -175,4 +175,15 @@ main {
 .cartao-de-compra {
     background-color: gray;
     border-radius: 10px;
+    padding: 10px;
+}
+
+.container-de-compras {
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+}
+
+.informacoes-compra {
+    display: flex;
+    justify-content: space-between;
 }
