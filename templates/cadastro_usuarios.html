@@ -16,10 +16,10 @@
             <input name="nome" type="text" placeholder="Digite seu nome" autofocus="true" class="input-required" oninput="validarNome()" required/>
             <span class="span-required">Seu nome não pode ter menos de 3 caractéres</span>
             <label for="email">E-mail</label>
-            <input id="email" name="email" type="email" placeholder="Digite seu e-mail" class="input-required" required/>
+            <input id="email" name="email" type="email" placeholder="Digite seu e-mail" class="input-required" oninput="validarEmail()" required/>
             <span class="span-required">Digite um email válido</span>
             <label for="password">Senha</label>
-            <input id="senha" name="senha" type="password" placeholder="Digite sua senha" class="input-required" required/>
+            <input id="senha" name="senha" type="password" placeholder="Digite sua senha" class="input-required" oninput="validarSenha()" required/>
             <span class="span-required">A senha tem conter no mínimo 6 dígitos</span>
             <input type="button" value="Acessar" class="btn" id="botao"/>
         </form>
@@ -50,7 +50,27 @@
         }
         else 
         {  
-            console.log('Validado o nome');
+            removerErro(0);
+        }
+    }
+
+    function validarEmail() {
+        if (emailRegex.test(inputs[1].value) != true) {
+            mostrarErro(1);
+        }
+        else
+        {
+            removerErro(1);
+        }
+    }
+
+    function validarSenha() {
+        if (inputs[2].value.length < 6) {
+            mostrarErro(2);
+        }
+        else
+        {
+            removerErro(2);
         }
     }
 </script>

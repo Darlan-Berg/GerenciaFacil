@@ -42,10 +42,10 @@
                     <input id="marca" name="marca" type="text" required/>
 
                     <label for="marca">Valor da Compra desses Produtos</label>
-                    <input id="valor_compra" name="valor_compra" type="number" required/>
+                    <input id="valor_compra" name="valor_compra" type="number" min="1" oninput="validarValorCompra()" required/>
 
                     <label for="quantidade">Quantidade</label>
-                    <input id="quantidade" name="quantidade" type="number" required/>
+                    <input id="quantidade" name="quantidade" type="number" min="1" oninput="validarQuantidade()" required/>
 
                     <label for="data-validade">Data da Validade</label>
                     <input id="data-validade" name="data-validade" type="date" required/>
@@ -108,3 +108,22 @@
 </main>
 
 {% endblock %}
+
+<script>
+    
+    let valorCompra = document.getElementById("valor_compra");
+    let quantidade = document.getElementById("quantidade");
+
+    function validarValorCompra() {
+        if (valorCompra.value < 0) {
+            valorCompra.value = 0;
+        }
+    }
+
+    function validarQuantidade() {
+        if (quantidade.value < 0) {
+            quantidade.value = 0;
+        }
+    }
+    
+</script>
