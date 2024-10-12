@@ -59,16 +59,16 @@
 
     <div class="modal-compras">
         <h1>Informe os Dados da Compra:</h1>
-        <input type="date" required>
+        <input id="data" type="date" required>
         <div>
             <button onclick="abrirModal(`.modal`, `#backdrop2`)"><img src="https://img.icons8.com/ios/50/plus-key.png" alt="botao de adição"></button>
         </div>
 
-        <div id="container-cartoes"></div>
+        <div id="container-cards-produtos"></div>
 
         <div class="btns-modal-compras">
             <button onclick="fecharModal(`.modal-compras`, `#backdrop1`)">Cancelar</button>
-            <button onclick="cadastrarCompra()">Confirmar</button>
+            <button onclick="coletarProdutosDoModal()">Confirmar</button>
         </div>
     </div>
 
@@ -77,25 +77,25 @@
             {% for compra in lista_compras %}
                 <div class="cartao-de-compra">
                     <div class="informacoes-compra">
-                        <span>Data: {{ compra["data"] }}</span>
-                        <span>ID: {{ compra["cod"] }}</span>
+                        <span class="data">Data: {{ compra["data"] }}</span>
+                        <span class="id">ID: {{ compra["cod"] }}</span>
                     </div>
                     <div class="container-produtos">
                         {% for produto in compra["produtos"] %}
-                            <div class="card">
-                                <div class="informacao-produto">
+                            <div class="card-produto">
+                                <div class="nome">
                                     Nome: {{ produto["nome"] }}
                                 </div>
-                                <div class="informacao-produto">
+                                <div class="marca">
                                     Marca: {{ produto["marca"] }}
                                 </div>
-                                <div class="informacao-produto">
+                                <div class="valor">
                                     Valor: {{ produto["valor"] }}
                                 </div>
-                                <div class="informacao-produto">
+                                <div class="quantidade">
                                     Quantidade: {{ produto["quantidade"] }}
                                 </div>
-                                <div class="informacao-produto">
+                                <div class="data-validade">
                                     Data de Validade: {{ produto["data_validade"] }}
                                 </div>
                             </div>
