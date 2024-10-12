@@ -105,7 +105,7 @@ body {
     background-color: #2b4c7e;
 }
 
-.card {
+.card-produto {
     display: grid;
     grid-template-columns: auto auto auto auto;
     row-gap: 20px;
