@@ -29,7 +29,7 @@
     const form  = document.getElementById("formLogin");
     const inputs= document.querySelectorAll(".input-required");
     const spans = document.querySelectorAll(".span-required");
-    var emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i;
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     function mostrarErro(index) {
         inputs[index].style.border = "2px solid #da1e1e";

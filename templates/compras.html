@@ -43,9 +43,11 @@
 
                     <label for="marca">Valor da Compra desses Produtos</label>
                     <input id="valor_compra" name="valor_compra" type="number" min="1" oninput="validarValorCompra()" required/>
+                    <span class="span-required">O valor da compra não pode ser negativa</span>
 
                     <label for="quantidade">Quantidade</label>
                     <input id="quantidade" name="quantidade" type="number" min="1" oninput="validarQuantidade()" required/>
+                    <span class="span-required">A quantidade não pode ser negativa</span>
 
                     <label for="data-validade">Data da Validade</label>
                     <input id="data-validade" name="data-validade" type="date" required/>
@@ -116,14 +118,21 @@
 
     function validarValorCompra() {
         if (valorCompra.value < 0) {
-            valorCompra.value = 0;
+            alert("Por favor, insira um valor positivo para a compra.");
+            valorCompra.value = 1; // ou 0, dependendo do que você preferir
         }
     }
 
     function validarQuantidade() {
         if (quantidade.value < 0) {
-            quantidade.value = 0;
+            alert("Por favor, insira uma quantidade positiva.");
+            quantidade.value = 1; // ou 0, dependendo do que você preferir
         }
     }
+
+    // Para garantir a validação quando o campo perder o foco
+    valorCompra.addEventListener("input", validarValorCompra);
+    quantidade.addEventListener("input", validarQuantidade);
+
     
 </script>
