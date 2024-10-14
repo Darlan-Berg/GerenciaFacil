@@ -30,30 +30,28 @@
 
     <div class="modal">
         <div class="page">
-            <form  action="/cadastro-compras" id="infoForm" onsubmit="submitForm(event)" method="POST" class="form-compras">
+            <form  action="/cadastro-compras" id="infoForm" method="POST" class="form-compras">
                 <h1>Cadastro de Compra</h1>
                 <p>Digite os dados da compra nos campos abaixo:</p>
                 <div class="camposForm">
 
                     <label for="nome">Nome do Produto</label>
-                    <input id="nome_produto" name="nome_produto" type="text" autofocus="true" required/>
+                    <input id="nome" name="nome" type="text" autofocus="true" required/>
 
                     <label for="marca">Marca</label>
                     <input id="marca" name="marca" type="text" required/>
 
-                    <label for="marca">Valor da Compra desses Produtos</label>
-                    <input id="valor_compra" name="valor_compra" type="number" min="1" oninput="validarValorCompra()" required/>
-                    <span class="span-required">O valor da compra não pode ser negativa</span>
+                    <label for="valor">Valor da Compra desses Produtos</label>
+                    <input id="valor" name="valor" type="number" min="1" oninput="validarValorCompra()" required/>
 
                     <label for="quantidade">Quantidade</label>
                     <input id="quantidade" name="quantidade" type="number" min="1" oninput="validarQuantidade()" required/>
-                    <span class="span-required">A quantidade não pode ser negativa</span>
 
-                    <label for="data-validade">Data da Validade</label>
-                    <input id="data-validade" name="data-validade" type="date" required/>
+                    <label for="data_validade">Data da Validade</label>
+                    <input id="data_validade" name="data_validade" type="date" required/>
                 </div>
 
-                <input type="submit" value="Confirmar" class="btn" id="botao-confirmar"/>
+                <button type="button" onclick="adicionarProduto()">Adicionar Produto</button>
                 <input type="button" value="Cancelar" class="btn" id="botao-cancelar" onclick="fecharModal(`.modal`, `#backdrop2`)"/>
             </form>
         </div>
@@ -70,7 +68,7 @@
 
         <div class="btns-modal-compras">
             <button onclick="fecharModal(`.modal-compras`, `#backdrop1`)">Cancelar</button>
-            <button onclick="coletarProdutosDoModal()">Confirmar</button>
+            <button type="button" onclick="confirmarCompra()">Confirmar Compra</button>
         </div>
     </div>
 
@@ -118,21 +116,14 @@
 
     function validarValorCompra() {
         if (valorCompra.value < 0) {
-            alert("Por favor, insira um valor positivo para a compra.");
-            valorCompra.value = 1; // ou 0, dependendo do que você preferir
+            valorCompra.value = 0;
         }
     }
 
     function validarQuantidade() {
         if (quantidade.value < 0) {
-            alert("Por favor, insira uma quantidade positiva.");
-            quantidade.value = 1; // ou 0, dependendo do que você preferir
+            quantidade.value = 0;
         }
     }
-
-    // Para garantir a validação quando o campo perder o foco
-    valorCompra.addEventListener("input", validarValorCompra);
-    quantidade.addEventListener("input", validarQuantidade);
-
     
 </script>
