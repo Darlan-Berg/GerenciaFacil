@@ -32,59 +32,83 @@ function desativarBackdrop (idBackdrop) {
     }
 }
 
-function submitForm(event) {
-    event.preventDefault();
+let produtos = [];  // lista para armazenar os produtos cadastrados
 
-    // Obtém os valores dos inputs
-    const nome = document.getElementById('nome_produto').value;
+// função para adicionar um produto na lista de compras
+function adicionarProduto() {
+    const nome = document.getElementById('nome').value;
     const marca = document.getElementById('marca').value;
-    const valorCompra = document.getElementById('valor_compra').value;
-    const quantidade = document.getElementById('quantidade').value;
-    const dataValidade = document.getElementById('data-validade').value;
+    const valor = parseFloat(document.getElementById('valor').value);
+    const quantidade = parseInt(document.getElementById('quantidade').value);
+    const data_validade = document.getElementById('data_validade').value;
 
-    // Cria um novo cartão com as informações
-    const containerCartoes = document.getElementById('container-cards-produtos');
-    const cardDiv = document.createElement('div');
-    cardDiv.classList.add(`card`);
-    cardDiv.innerHTML = `
-        <div>
-        <span>Nome: </span> <span class="nome">${nome}</span>
-        </div>
-        <div>
-            <span>Marca: </span> <span class="marca">${marca}</span>
-        </div>
-        <div>
-            <span>Valor da Compra: </span> <span class="valor">${valorCompra}</span>
-        </div>
-        <div>
-            <span>Quantidade: </span> <span class="quantidade">${quantidade}</span>
-        </div>
-        <div>
-            <span>Data de Validade: </span> <span class="data-validade">${dataValidade}</span>
-        </div>
-    `;
-    containerCartoes.appendChild(cardDiv);
+    // criar um objeto do produto
+    const produto = {
+        nome: nome,
+        marca: marca,
+        valor: valor,
+        quantidade: quantidade,
+        data_validade: data_validade
+    };
 
-    // Limpa o formulário e fecha a segunda modal
-    document.getElementById('infoForm').reset();
-    fecharModal(`.modal`, `#backdrop2`);
+    // adiciona o produto na lista
+    produtos.push(produto);
+
+    // atualiza a lista de produtos no modal
+    atualizarListaProdutos();
+
+    // fechar o modal de produto depois adicionar
+    fecharModal('.modal', `#backdrop2`);
 }
 
-function coletarProdutosDoModal () {
-    const dataCompra = document.querySelector(`#data`);
-    const id = 12345; // gerar id para cada compra
+// funcao para exibir os produtos cadastrados no modal
+function atualizarListaProdutos() {
+    const listaProdutosDiv = document.getElementById('container-cards-produtos');
+    listaProdutosDiv.innerHTML = '';
 
-    let produtos = [];
-    const conteudoDoModal = document.querySelectorAll(`.card`);
-    conteudoDoModal.forEach(card => {
-        let produto = {
-            nome: card.querySelector(`.nome`).innerHTML,
-            nome: card.querySelector(`.marca`).innerHTML,
-            nome: card.querySelector(`.valor`).innerHTML,
-            nome: card.querySelector(`.quantidade`).innerHTML,
-            nome: card.querySelector(`.data-validade`).innerHTML
-        };
-        produtos.push(produto);
+    // loop para criar os cards de produtos
+    produtos.forEach(produto => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.innerHTML = `
+            <p>Nome: ${produto.nome}</p>
+            <p>Marca: ${produto.marca}</p>
+            <p>Valor: ${produto.valor}</p>
+            <p>Quantidade: ${produto.quantidade}</p>
+            <p>Data de Validade: ${produto.data_validade}</p>
+        `;
+        listaProdutosDiv.appendChild(card);
+    });
+}
+
+// funcao para confirmar a compra e enviar os dados para o flask
+function confirmarCompra() {
+    const dataCompra = "07-10-24";
+    const codigoCompra = "12345";
+
+    const compra = {
+        data: dataCompra,
+        cod: codigoCompra,
+        produtos: produtos
+    };
+
+    // enviar os dados para o servidor usando fetch
+    fetch('/confirmar-compra', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(compra)
     })
-    return produtos;
+    .then(response => response.json())
+    .then(data => {
+        alert('Compra confirmada com sucesso!');
+        // limpar a lista de produtos depois da confirmacao
+        produtos = [];
+        atualizarListaProdutos();
+    })
+    .catch(error => {
+        console.error('Erro ao confirmar compra:', error);
+    });
+    fecharModal('.modal-compras', '#backdrop1');
 }
