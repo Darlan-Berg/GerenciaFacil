@@ -9,6 +9,19 @@ if __name__ == "__main__":
 
 caminho_historico_compras = os.path.join(os.path.dirname(os.path.abspath(__file__)), "historico_compras.json")
 
+# carregar o historico de compras
+def carregar_historico_compras():
+    try:
+        with open('historico_compras.json', 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return []
+
+# salvar o historico de compras
+def salvar_historico_compras(historico):
+    with open('historico_compras.json', 'w') as f:
+        json.dump(historico, f, indent=4)
+
 @app.route("/")
 @app.route("/dashboard")
 def main():
@@ -21,6 +34,20 @@ def estoque():
 @app.route("/cadastro-vendas")
 def cadastro_vendas():
     return render_template("cadastro_vendas.html")
+
+@app.route('/confirmar-compra', methods=['POST'])
+def confirmar_compra():
+    # recebe o JSON enviado pelo javascript
+    nova_compra = request.get_json()
+
+    # carrega o historico atual de compras
+    historico = carregar_historico_compras()
+
+    # adiciona a nova compra ao historico
+    historico.append(nova_compra)
+
+    # salva o historico atualizado no arquivo
+    salvar_historico_compras(historico)
 
 @app.route("/cadastro-compras", methods=["GET", "POST"])
 def cadastro_compras():
