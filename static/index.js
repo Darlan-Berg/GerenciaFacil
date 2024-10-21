@@ -100,9 +100,13 @@ function confirmarCompra() {
         },
         body: JSON.stringify(compra)
     })
-    .then(response => response.json())
+    .then(response => {
+        return response
+
+    })
     .then(data => {
         alert('Compra confirmada com sucesso!');
+        console.log(data)
         // limpar a lista de produtos depois da confirmacao
         produtos = [];
         atualizarListaProdutos();

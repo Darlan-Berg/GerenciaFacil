@@ -3,8 +3,86 @@
         "data": "07-10-24",
         "cod": "12345",
         "produtos": [
-            { "nome": "macarrão", "marca": "cipan", "valor": 10, "quantidade": 5, "data_validade": "01-01-25" },
-            { "nome": "macarrão", "marca": "cipan", "valor": 10, "quantidade": 5, "data_validade": "01-01-25" }
+            {
+                "nome": "macarr\u00e3o",
+                "marca": "cipan",
+                "valor": 10,
+                "quantidade": 5,
+                "data_validade": "01-01-25"
+            },
+            {
+                "nome": "macarr\u00e3o",
+                "marca": "cipan",
+                "valor": 10,
+                "quantidade": 5,
+                "data_validade": "01-01-25"
+            }
+        ]
+    },
+    {
+        "data": "07-10-24",
+        "cod": "12345",
+        "produtos": [
+            {
+                "nome": "bhjhjhj",
+                "marca": "jhjhjjhjh",
+                "valor": 12,
+                "quantidade": 2,
+                "data_validade": "2024-10-17"
+            }
+        ]
+    },
+    {
+        "data": "07-10-24",
+        "cod": "12345",
+        "produtos": [
+            {
+                "nome": "rtrtr",
+                "marca": "tretre",
+                "valor": 112,
+                "quantidade": 12,
+                "data_validade": "2024-11-02"
+            }
+        ]
+    },
+    {
+        "data": "07-10-24",
+        "cod": "12345",
+        "produtos": [
+            {
+                "nome": "iiuii",
+                "marca": "iuiyuiuyyu",
+                "valor": 23,
+                "quantidade": 23,
+                "data_validade": "2024-10-18"
+            }
+        ]
+    },
+    {
+        "data": "07-10-24",
+        "cod": "12345",
+        "produtos": [
+            {
+                "nome": "iiuii",
+                "marca": "iuiyuiuyyu",
+                "valor": 23,
+                "quantidade": 23,
+                "data_validade": "2024-10-18"
+            },
+            {
+                "nome": "iiuii",
+                "marca": "iuiyuiuyyu",
+                "valor": 23,
+                "quantidade": 23,
+                "data_validade": "2024-10-18"
+            },
+            {
+                "nome": "iiuii",
+                "marca": "iuiyuiuyyu",
+                "valor": 23,
+                "quantidade": 23,
+                "data_validade": "2024-10-18"
+            }
         ]
     }
 ]

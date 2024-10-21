@@ -40,6 +40,8 @@ def confirmar_compra():
     # recebe o JSON enviado pelo javascript
     nova_compra = request.get_json()
 
+    print(nova_compra)
+
     # carrega o historico atual de compras
     historico = carregar_historico_compras()
 
@@ -48,6 +50,9 @@ def confirmar_compra():
 
     # salva o historico atualizado no arquivo
     salvar_historico_compras(historico)
+    return redirect(url_for("cadastro_compras"))
+
+
 
 @app.route("/cadastro-compras", methods=["GET", "POST"])
 def cadastro_compras():
