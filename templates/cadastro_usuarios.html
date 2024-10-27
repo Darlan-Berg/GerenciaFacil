@@ -19,8 +19,11 @@
             <input id="email" name="email" type="email" placeholder="Digite seu e-mail" class="input-required" oninput="validarEmail()" required/>
             <span class="span-required">Digite um email válido</span>
             <label for="password">Senha</label>
-            <input id="senha" name="senha" type="password" placeholder="Digite sua senha" class="input-required" oninput="validarSenha()" required/>
+            <input id="senha" name="senha" type="password" placeholder="Digite sua senha" class="input-required" oninput="validarSenha(), confirmarSenha()" required/>
             <span class="span-required">A senha tem conter no mínimo 6 dígitos</span>
+            <label for="confirmacao-senha">Confirmar Senha</label>
+            <input id="confirmacao-senha" name="confirmacao-senha" type="password" placeholder="Digite sua senha novamente" class="input-required" oninput="confirmarSenha()" required/>
+            <span class="span-required">A senhas devem ser iguais</span>
             <input type="button" value="Acessar" class="btn" id="botao"/>
         </form>
     </div>
@@ -71,6 +74,15 @@
         else
         {
             removerErro(2);
+        }
+    }
+    function confirmarSenha() {
+        if (inputs[2].value != inputs[3].value) {
+            mostrarErro(3);
+        }
+        else
+        {
+            removerErro(3);
         }
     }
 </script>

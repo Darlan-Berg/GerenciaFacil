@@ -101,6 +101,7 @@
                             </div>
                         {% endfor %}
                     </div>
+                <button class="botao-excluir"  onclick="this.parentElement.style.display = 'none';">Excluir</button>
                 </div>
             {% endfor %}
         {% endif %}
@@ -110,20 +111,32 @@
 {% endblock %}
 
 <script>
-    
-    let valorCompra = document.getElementById("valor_compra");
-    let quantidade = document.getElementById("quantidade");
+    document.querySelectorAll('.botao-excluir').forEach(button => {
+        button.addEventListener('click', function() {
+            const compraDiv = this.parentElement; // Pega o elemento da compra
+            const compraId = compraDiv.querySelector('.id').innerText.split(': ')[1]; // Pega o ID da compra
 
-    function validarValorCompra() {
-        if (valorCompra.value < 0) {
-            valorCompra.value = 0;
-        }
-    }
-
-    function validarQuantidade() {
-        if (quantidade.value < 0) {
-            quantidade.value = 0;
-        }
-    }
-    
+            // Chama a API para excluir a compra
+            fetch('/excluir-compra', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id: compraId }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao excluir a compra');
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert(data.message); // Mensagem de sucesso
+                compraDiv.style.display = 'none'; // Remove o elemento do DOM
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        });
+    });
 </script>

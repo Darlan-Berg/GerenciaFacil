@@ -348,3 +348,29 @@ main {
 section header {
     background-color: #2b4c7e;
 }
+
+table {
+  width: 80%;
+  border-collapse: collapse;
+
+}
+
+table td, table tr {
+  border: #ffffff solid 3px;
+  color: rgb(255, 255, 255);
+  padding: 5px;
+  text-align: center;
+}
+
+table tr:nth-child(even) {
+  background-color: gray;
+}
+
+table tr:nth-child(odd) {
+  background-color: #2b4c7e;
+  border-radius: 10px;
+}
+
+table tr:first-child {
+  border-radius: 10%;
+}

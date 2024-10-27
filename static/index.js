@@ -83,8 +83,8 @@ function atualizarListaProdutos() {
 
 // funcao para confirmar a compra e enviar os dados para o flask
 function confirmarCompra() {
-    const dataCompra = "07-10-24";
-    const codigoCompra = "12345";
+    const dataCompra = document.querySelector(`#data`).value;
+    const codigoCompra = Math.floor(Math.random() * 10000);
 
     const compra = {
         data: dataCompra,

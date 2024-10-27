@@ -14,5 +14,17 @@
         </div>
     </header>
 </main>
+<div class="tabela">
+    <table>
+        {% if estoque %}
+            {% for produto in estoque %}
+                <tr>
+                    <td><strong>{{ produto["nome"] }}</strong></td><td><strong>{{ produto["valor"] }}</strong></td><td><strong>{{ produto["qtd"] }}</strong></td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+</div>
 
 {% endblock %}
+

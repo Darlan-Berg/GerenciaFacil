@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 import json
 import os
 
@@ -22,6 +22,18 @@ def salvar_historico_compras(historico):
     with open('historico_compras.json', 'w') as f:
         json.dump(historico, f, indent=4)
 
+def carregar_estoque():
+    try:
+        with open("estoque.json", "r") as estoque:
+            return json.load(estoque)
+    except FileNotFoundError:
+        return []
+    
+def salvar_estoque(estoque):
+    with open('estoque.json', 'w') as antigo_etoque:
+        json.dump(estoque, antigo_etoque, indent=4)
+
+
 @app.route("/")
 @app.route("/dashboard")
 def main():
@@ -29,7 +41,7 @@ def main():
 
 @app.route("/estoque")
 def estoque():
-    return render_template("estoque.html")
+    return render_template("estoque.html", estoque=carregar_estoque())
 
 @app.route("/cadastro-vendas")
 def cadastro_vendas():
@@ -40,6 +52,19 @@ def confirmar_compra():
     # recebe o JSON enviado pelo javascript
     nova_compra = request.get_json()
 
+    estoque = carregar_estoque()
+    produto_existente = False
+
+    '''for produto in estoque:
+        if produto["nome"] == nova_compra["nome"] and produto["marca"] == nova_compra["marca"]:
+            produto["qtd"] += nova_compra["quantidade"]
+            produto_existente = True
+
+    if not produto_existente:
+        estoque.append(nova_compra)
+
+    salvar_estoque(estoque)
+'''
     print(nova_compra)
 
     # carrega o historico atual de compras
@@ -61,37 +86,6 @@ def cadastro_compras():
             historico_compras = json.load(arq_json)
         return render_template("compras.html", lista_compras=historico_compras)
 
-    nome = request.form.get("nome_produto")
-    marca = request.form.get("marca")
-    valor = request.form.get("valor")
-    preco = request.form.get("preco")
-    quantidade = request.form.get("quantidade")
-    data_compra = request.form.get("data-compra")
-    data_validade = request.form.get("data-validade")
-
-    # ler arquivo estoque.json
-    with open(caminho_historico_compras, "r", encoding="utf-8") as arq_json:
-        estoque = json.load(arq_json)
-
-    # sobrescrever estoque.json
-    with open(caminho_historico_compras, "w", encoding="utf-8") as arq_json:
-        novo_produto = {
-            "nome": nome,
-            "marca": marca,
-            "valor": valor,
-            "preco": preco,
-            "quantidade": quantidade,
-            "data_compra": data_compra,
-            "data_validade": data_validade
-        }
-        estoque_atualizado = estoque
-        estoque_atualizado.append(novo_produto)
-
-        # sobrescrever estoque.json com as informacoes atuais
-        json.dump(estoque_atualizado, arq_json, indent=4)
-
-        return redirect(url_for("cadastro_compras"))
-
 @app.route("/login", methods=["GET"])
 def login():
     return render_template("login.html")
@@ -103,3 +97,20 @@ def cadastro():
 @app.route("/recuperar-senha")
 def recuperar_senha():
     return render_template("recuperar_senha.html")
+
+@app.route('/excluir-compra', methods=['POST'])
+def excluir_compra():
+    compra_id = request.json.get('id')
+    
+    # Carrega os dados do JSON
+    with open('./historico_compras.json') as f:
+        compras = json.load(f)
+
+    # Filtra as compras para excluir a que tem o ID especificado
+    compras = [compra for compra in compras if compra['cod'] != compra_id]
+
+    # Salva de volta no arquivo JSON
+    with open('./historico_compras.json', 'w') as f:
+        json.dump(compras, f)
+
+    return jsonify({'message': 'Compra excluída com sucesso!'})
