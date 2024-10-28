@@ -53,18 +53,34 @@ def confirmar_compra():
     nova_compra = request.get_json()
 
     estoque = carregar_estoque()
-    produto_existente = False
+    
+    
+    for produto_compra in nova_compra["produtos"]:
+        
+        produto_existente = False
+        indice = 0
 
-    '''for produto in estoque:
-        if produto["nome"] == nova_compra["nome"] and produto["marca"] == nova_compra["marca"]:
-            produto["qtd"] += nova_compra["quantidade"]
-            produto_existente = True
+        for produto_estoque in estoque:
+            if produto_compra["nome"] == produto_estoque["nome"] and produto_compra["marca"] == produto_estoque["marca"]:
+                
+                produto_para_ser_adicionado = estoque[indice]
+                produto_para_ser_adicionado["qtd"] += produto_compra["quantidade"]
+                produto_existente = True
+                break
 
-    if not produto_existente:
-        estoque.append(nova_compra)
+            indice += 1
+        
+        if not produto_existente:
+            estoque.append({
+                "nome": produto_compra["nome"],
+                "marca": produto_compra["marca"],
+                "valor": produto_compra["valor"],
+                "qtd": produto_compra["quantidade"],
+                "data_validade": produto_compra["data_validade"]
+            })
 
     salvar_estoque(estoque)
-'''
+
     print(nova_compra)
 
     # carrega o historico atual de compras

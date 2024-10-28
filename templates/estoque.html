@@ -16,10 +16,21 @@
 </main>
 <div class="tabela">
     <table>
+        <tr>
+            <td><strong>Nome</strong></td>
+            <td><strong>Marca</strong></td>
+            <td><strong>Valor</strong></td>
+            <td><strong>Quantidade</strong></td>
+            <td><strong>Data de Validade</strong></td>
+        </tr>
         {% if estoque %}
             {% for produto in estoque %}
                 <tr>
-                    <td><strong>{{ produto["nome"] }}</strong></td><td><strong>{{ produto["valor"] }}</strong></td><td><strong>{{ produto["qtd"] }}</strong></td>
+                    <td><strong>{{ produto["nome"] }}</strong></td>
+                    <td><strong>{{ produto["marca"] }}</strong></td>
+                    <td><strong>R${{ produto["valor"] }}</strong></td>
+                    <td><strong>{{ produto["qtd"] }}</strong></td>
+                    <td><strong>{{ produto["data_validade"] }}</strong></td>
                 </tr>
             {% endfor %}
         {% endif %}
