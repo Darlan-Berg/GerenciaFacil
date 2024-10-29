@@ -1,3 +1,41 @@
 [
-    
+    {
+        "data": "",
+        "cod": 2915,
+        "produtos": [
+            {
+                "nome": "todinho",
+                "marca": "neslte",
+                "valor": 2234,
+                "quantidade": 122,
+                "data_validade": "0323-02-12"
+            }
+        ]
+    },
+    {
+        "data": "",
+        "cod": 3536,
+        "produtos": [
+            {
+                "nome": "",
+                "marca": "",
+                "valor": null,
+                "quantidade": null,
+                "data_validade": ""
+            }
+        ]
+    },
+    {
+        "data": "",
+        "cod": 8090,
+        "produtos": [
+            {
+                "nome": "dwfghhhtet",
+                "marca": "",
+                "valor": null,
+                "quantidade": null,
+                "data_validade": ""
+            }
+        ]
+    }
 ]

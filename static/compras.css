@@ -115,6 +115,14 @@ body {
     border-radius: 10px;
 }
 
+.card-produto div {
+    margin: 5px;
+    background-color: gray;
+    border-radius: 10px;
+    align-content: center;
+    padding: 5px;
+}
+
 /* estilos das janelas modais de compras e de produtos */
 
 main {
@@ -177,11 +185,13 @@ main {
     border-radius: 10px;
     padding: 10px;
     margin: 5px;
+    
 }
 
 .container-de-compras {
     display: grid;
-    grid-template-columns: 30% 30% 30%;
+    grid-template-columns: 33% 33% 33%;
+    justify-content: space-between;
 }
 
 .informacoes-compra {

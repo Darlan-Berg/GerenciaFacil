@@ -1,3 +1,23 @@
 [
-
+    {
+        "nome": "todinho",
+        "marca": "neslte",
+        "valor": 2234,
+        "qtd": 122,
+        "data_validade": "0323-02-12"
+    },
+    {
+        "nome": "",
+        "marca": "",
+        "valor": null,
+        "qtd": null,
+        "data_validade": ""
+    },
+    {
+        "nome": "dwfghhhtet",
+        "marca": "",
+        "valor": null,
+        "qtd": null,
+        "data_validade": ""
+    }
 ]

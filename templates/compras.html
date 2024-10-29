@@ -111,32 +111,28 @@
 {% endblock %}
 
 <script>
+
+    fetch("historico_compras.json").then((response) => {
+        response.json().then((historico) => {
+            var historico_compras = historico;
+        });
+    });
+
     document.querySelectorAll('.botao-excluir').forEach(button => {
         button.addEventListener('click', function() {
             const compraDiv = this.parentElement; // Pega o elemento da compra
             const compraId = compraDiv.querySelector('.id').innerText.split(': ')[1]; // Pega o ID da compra
 
-            // Chama a API para excluir a compra
-            fetch('/excluir-compra', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ id: compraId }),
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao excluir a compra');
-                }
-                return response.json();
-            })
-            .then(data => {
-                alert(data.message); // Mensagem de sucesso
-                compraDiv.style.display = 'none'; // Remove o elemento do DOM
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-            });
+            indice = 0;
+
+            for (let compra of historico_compras) {
+                if (compra["cod"] == compraId) {
+                    historico_compras.splice(indice, 1)
+                    console.log(historico_compras)
+                };
+                indice += 1;
+            };
+
         });
     });
 </script>
