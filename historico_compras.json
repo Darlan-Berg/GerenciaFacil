@@ -1,40 +1,47 @@
 [
     {
-        "data": "",
+        "data": "24-11-2024",
         "cod": 2915,
         "produtos": [
             {
-                "nome": "todinho",
-                "marca": "neslte",
-                "valor": 2234,
-                "quantidade": 122,
-                "data_validade": "0323-02-12"
+                "nome": "Achocolatado",
+                "marca": "Nestle",
+                "valor": 40,
+                "quantidade": 20,
+                "data_validade": "28-02-2025"
+            },
+            {
+                "nome": "Batata Palha",
+                "marca": "São Braz",
+                "valor": 20,
+                "quantidade": 5,
+                "data_validade": "01-10-2025"
             }
         ]
     },
     {
-        "data": "",
-        "cod": 3536,
+        "data": "10-11-2024",
+        "cod": 3333,
         "produtos": [
             {
-                "nome": "",
-                "marca": "",
-                "valor": null,
-                "quantidade": null,
-                "data_validade": ""
+                "nome": "Pippo's",
+                "marca": "São Braz",
+                "valor": 50,
+                "quantidade": 20,
+                "data_validade": "19-03-2025"
             }
         ]
     },
     {
-        "data": "",
-        "cod": 8090,
+        "data": "31-10-2024",
+        "cod": 2347,
         "produtos": [
             {
-                "nome": "dwfghhhtet",
-                "marca": "",
-                "valor": null,
-                "quantidade": null,
-                "data_validade": ""
+                "nome": "Amaciante",
+                "marca": "Comfort",
+                "valor": 40,
+                "quantidade": 10,
+                "data_validade": "28-02-2025"
             }
         ]
     }
