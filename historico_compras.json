@@ -12,7 +12,7 @@
             },
             {
                 "nome": "Batata Palha",
-                "marca": "São Braz",
+                "marca": "S\u00c3\u00a3o Braz",
                 "valor": 20,
                 "quantidade": 5,
                 "data_validade": "01-10-2025"
@@ -25,7 +25,7 @@
         "produtos": [
             {
                 "nome": "Pippo's",
-                "marca": "São Braz",
+                "marca": "S\u00c3\u00a3o Braz",
                 "valor": 50,
                 "quantidade": 20,
                 "data_validade": "19-03-2025"
@@ -42,6 +42,32 @@
                 "valor": 40,
                 "quantidade": 10,
                 "data_validade": "28-02-2025"
+            }
+        ]
+    },
+    {
+        "data": "",
+        "cod": 318,
+        "produtos": [
+            {
+                "nome": "hrhrtt",
+                "marca": "ytyytyty",
+                "valor": 232,
+                "quantidade": 3,
+                "data_validade": "23232-02-23"
+            }
+        ]
+    },
+    {
+        "data": "",
+        "cod": 5625,
+        "produtos": [
+            {
+                "nome": "43343533355353",
+                "marca": "jdwiwwh",
+                "valor": null,
+                "quantidade": 43,
+                "data_validade": ""
             }
         ]
     }

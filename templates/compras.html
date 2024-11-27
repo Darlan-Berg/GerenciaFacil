@@ -16,6 +16,68 @@
 {% endblock %}
 
 {% block content %}
+<head>
+    <script>
+
+        /*const fd = require("fs")
+        
+        const write = ({ data, fileName }) => {
+            fs.writeFileSync (fileName, JSON.stringify(data))
+        }
+        
+        const readFromFile = fileName => {
+            if (!fs.existsSync(fileName)) {
+                return null
+            }
+            
+            return fs.readFileSync (fileName, 'utf-8')
+        
+        }
+        const readJSON = fileName => {
+            const readFile = readFromFile (fileName)
+        
+            if (!readFile) {
+                return readFile
+            }
+        
+            return JSON.parse (readFile)
+        }
+        
+        function excluir_card() {
+            this.parentElement.style.display = 'none';
+            write({data: null, fileName: "../historico_compras.json"})
+        }
+        */
+        function excluir_card() {
+            
+            fetch("../historico_compras.json").then((response) => {
+                response.json().then((historico) => {
+                    var historico_compras = historico;
+                });
+            });
+        
+            document.querySelectorAll('.botao-excluir').forEach(button => {
+                button.addEventListener('click', function() {
+                    console.log("bdjcbjvfdbidvhiwdhfdefhif")
+                    const compraDiv = this.parentElement; // Pega o elemento da compra
+                    const compraId = compraDiv.querySelector('.id').innerText.split(': ')[1]; // Pega o ID da compra
+        
+                    indice = 0;
+        
+                    for (let compra of historico_compras) {
+                        if (compra["cod"] == compraId) {
+                            historico_compras.splice(indice, 1)
+                            console.log(historico_compras)
+                        };
+                        indice += 1;
+                    };
+        
+                });
+            });
+        }
+        </script>
+        
+</head>
 
 <main>
     <header class="cabecalho-inferior">
@@ -101,7 +163,7 @@
                             </div>
                         {% endfor %}
                     </div>
-                <button class="botao-excluir"  onclick="this.parentElement.style.display = 'none';">Excluir</button>
+                <button class="botao-excluir"  onclick="excluir_card()">Excluir</button>
                 </div>
             {% endfor %}
         {% endif %}
@@ -110,29 +172,3 @@
 
 {% endblock %}
 
-<script>
-
-    fetch("historico_compras.json").then((response) => {
-        response.json().then((historico) => {
-            var historico_compras = historico;
-        });
-    });
-
-    document.querySelectorAll('.botao-excluir').forEach(button => {
-        button.addEventListener('click', function() {
-            const compraDiv = this.parentElement; // Pega o elemento da compra
-            const compraId = compraDiv.querySelector('.id').innerText.split(': ')[1]; // Pega o ID da compra
-
-            indice = 0;
-
-            for (let compra of historico_compras) {
-                if (compra["cod"] == compraId) {
-                    historico_compras.splice(indice, 1)
-                    console.log(historico_compras)
-                };
-                indice += 1;
-            };
-
-        });
-    });
-</script>
