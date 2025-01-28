@@ -7,7 +7,9 @@
 {% block title %} Cadastro de Compras {% endblock %}
 
 {% block style_scripts %}
-<script src="../static/index.js"></script>
+<script src="url_for('static', filename='index.js')" defer></script>
+<h1>cade a tag?</h1>
+<h1>Oláaaaaaaaa</h1>
 {% endblock %}
 
 {% block backdrops %}
@@ -20,50 +22,50 @@
     <script>
 
         /*const fd = require("fs")
-        
+
         const write = ({ data, fileName }) => {
             fs.writeFileSync (fileName, JSON.stringify(data))
         }
-        
+
         const readFromFile = fileName => {
             if (!fs.existsSync(fileName)) {
                 return null
             }
-            
+
             return fs.readFileSync (fileName, 'utf-8')
-        
+
         }
         const readJSON = fileName => {
             const readFile = readFromFile (fileName)
-        
+
             if (!readFile) {
                 return readFile
             }
-        
+
             return JSON.parse (readFile)
         }
-        
+
         function excluir_card() {
             this.parentElement.style.display = 'none';
             write({data: null, fileName: "../historico_compras.json"})
         }
         */
         function excluir_card() {
-            
+
             fetch("../historico_compras.json").then((response) => {
                 response.json().then((historico) => {
                     var historico_compras = historico;
                 });
             });
-        
+
             document.querySelectorAll('.botao-excluir').forEach(button => {
                 button.addEventListener('click', function() {
                     console.log("bdjcbjvfdbidvhiwdhfdefhif")
                     const compraDiv = this.parentElement; // Pega o elemento da compra
                     const compraId = compraDiv.querySelector('.id').innerText.split(': ')[1]; // Pega o ID da compra
-        
+
                     indice = 0;
-        
+
                     for (let compra of historico_compras) {
                         if (compra["cod"] == compraId) {
                             historico_compras.splice(indice, 1)
@@ -71,12 +73,134 @@
                         };
                         indice += 1;
                     };
-        
+
                 });
             });
         }
+        function abrirModal (nomeModal, nomeBackdrop) {
+
+    ativarBackdrop(nomeBackdrop);
+
+    var janelaModal = document.querySelector(nomeModal);
+    if (janelaModal) {
+        janelaModal.style.display = `block`;
+    }
+};
+
+function fecharModal (nomeModal, nomeBackdrop) {
+
+    desativarBackdrop(nomeBackdrop);
+
+    var janelaModal = document.querySelector(nomeModal);
+    if (janelaModal) {
+        janelaModal.style.display = `none`;
+    }
+};
+
+function ativarBackdrop (idBackdrop) {
+    var backdrop = document.querySelector(idBackdrop)
+    if (backdrop) {
+        backdrop.style.display = `block`;
+    }
+};
+
+function desativarBackdrop (idBackdrop) {
+    var backdrop = document.querySelector(idBackdrop)
+    if (backdrop) {
+        backdrop.style.display = `none`;
+    }
+};
+
+let produtos = [];  // lista para armazenar os produtos cadastrados
+
+// função para adicionar um produto na lista de compras
+function adicionarProduto() {
+    const nome = document.getElementById('nome').value;
+    const marca = document.getElementById('marca').value;
+    const data_validade = document.getElementById('data_validade').value;
+    const quantidade = parseInt(document.getElementById('quantidade').value);
+    const valor_compra = parseFloat(document.getElementById('valor_compra').value);
+    const valor_venda = parseFloat(document.getElementById('valor_venda').value);
+
+    // criar um objeto do produto
+    const produto = {
+        nome: nome,
+        marca: marca,
+        data_validade: data_validade,
+        quantidade: quantidade,
+        valor_compra: valor_compra,
+        valor_venda: valor_venda
+    };
+
+    // adiciona o produto na lista
+    produtos.push(produto);
+
+    // atualiza a lista de produtos no modal
+    atualizarListaProdutos();
+
+    // fechar o modal de produto depois adicionar
+    fecharModal('.modal', `#backdrop2`);
+}
+
+// funcao para exibir os produtos cadastrados no modal
+function atualizarListaProdutos() {
+    const listaProdutosDiv = document.getElementById('container-cards-produtos');
+    listaProdutosDiv.innerHTML = '';
+
+    // loop para criar os cards de produtos
+    produtos.forEach(produto => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.innerHTML = `
+            <p>Nome: ${produto.nome}</p>
+            <p>Marca: ${produto.marca}</p>
+            <p>Data de Validade: ${produto.data_validade}</p>
+            <p>Quantidade: ${produto.quantidade}</p>
+            <p>Valor de Compra: ${produto.valor_compra}</p>
+            <p>Valor de Compra: ${produto.valor_venda}</p>
+            `;
+        listaProdutosDiv.appendChild(card);
+    });
+}
+
+// funcao para confirmar a compra e enviar os dados para o flask
+function confirmarCompra() {
+    const dataCompra = document.querySelector(`#data`).value;
+    const codigoCompra = Math.floor(Math.random() * 10000);
+
+    const compra = {
+        data: dataCompra,
+        cod: codigoCompra,
+        produtos: produtos
+    };
+
+    // enviar os dados para o servidor usando fetch
+    fetch('/confirmar-compra', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(compra)
+    })
+    .then(response => {
+        return response
+
+    })
+    .then(data => {
+        alert('Compra confirmada com sucesso!');
+        console.log(data)
+        // limpar a lista de produtos depois da confirmacao
+        produtos = [];
+        atualizarListaProdutos();
+    })
+    .catch(error => {
+        console.error('Erro ao confirmar compra:', error);
+    });
+    fecharModal('.modal-compras', '#backdrop1');
+}
+
         </script>
-        
+
 </head>
 
 <main>
@@ -103,14 +227,17 @@
                     <label for="marca">Marca</label>
                     <input id="marca" name="marca" type="text" required/>
 
-                    <label for="valor">Valor da Compra desses Produtos</label>
-                    <input id="valor" name="valor" type="number" min="1" oninput="validarValorCompra()" required/>
+                    <label for="data_validade">Data da Validade</label>
+                    <input id="data_validade" name="data_validade" type="date" required/>
 
                     <label for="quantidade">Quantidade</label>
                     <input id="quantidade" name="quantidade" type="number" min="1" oninput="validarQuantidade()" required/>
 
-                    <label for="data_validade">Data da Validade</label>
-                    <input id="data_validade" name="data_validade" type="date" required/>
+                    <label for="valor_compra">Valor de Compra</label>
+                    <input id="valor_compra" name="valor_compra" type="number" min="1" oninput="validarValorCompra()" required/>
+
+                    <label for="valor_venda">Valor de Venda</label>
+                    <input id="valor_venda" name="valor_venda" type="number" required/>
                 </div>
 
                 <input type="button" class="btn" onclick="adicionarProduto()" value="Adicionar Produto"/>

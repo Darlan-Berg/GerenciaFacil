@@ -6,31 +6,31 @@ function abrirModal (nomeModal, nomeBackdrop) {
     if (janelaModal) {
         janelaModal.style.display = `block`;
     }
-}
+};
 
 function fecharModal (nomeModal, nomeBackdrop) {
-    
+
     desativarBackdrop(nomeBackdrop);
 
     var janelaModal = document.querySelector(nomeModal);
     if (janelaModal) {
         janelaModal.style.display = `none`;
     }
-}
+};
 
 function ativarBackdrop (idBackdrop) {
     var backdrop = document.querySelector(idBackdrop)
     if (backdrop) {
         backdrop.style.display = `block`;
     }
-}
+};
 
 function desativarBackdrop (idBackdrop) {
     var backdrop = document.querySelector(idBackdrop)
     if (backdrop) {
         backdrop.style.display = `none`;
     }
-}
+};
 
 let produtos = [];  // lista para armazenar os produtos cadastrados
 
@@ -38,17 +38,19 @@ let produtos = [];  // lista para armazenar os produtos cadastrados
 function adicionarProduto() {
     const nome = document.getElementById('nome').value;
     const marca = document.getElementById('marca').value;
-    const valor = parseFloat(document.getElementById('valor').value);
-    const quantidade = parseInt(document.getElementById('quantidade').value);
     const data_validade = document.getElementById('data_validade').value;
+    const quantidade = parseInt(document.getElementById('quantidade').value);
+    const valor_compra = parseFloat(document.getElementById('valor_compra').value);
+    const valor_venda = parseFloat(document.getElementById('valor_venda').value);
 
     // criar um objeto do produto
     const produto = {
         nome: nome,
         marca: marca,
-        valor: valor,
+        data_validade: data_validade,
         quantidade: quantidade,
-        data_validade: data_validade
+        valor_compra: valor_compra,
+        valor_venda: valor_venda
     };
 
     // adiciona o produto na lista
@@ -73,10 +75,11 @@ function atualizarListaProdutos() {
         card.innerHTML = `
             <p>Nome: ${produto.nome}</p>
             <p>Marca: ${produto.marca}</p>
-            <p>Valor: ${produto.valor}</p>
-            <p>Quantidade: ${produto.quantidade}</p>
             <p>Data de Validade: ${produto.data_validade}</p>
-        `;
+            <p>Quantidade: ${produto.quantidade}</p>
+            <p>Valor de Compra: ${produto.valor_compra}</p>
+            <p>Valor de Compra: ${produto.valor_venda}</p>
+            `;
         listaProdutosDiv.appendChild(card);
     });
 }

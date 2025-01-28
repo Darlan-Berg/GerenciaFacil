@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 import json
 import os
+import mysql.connector
 
 app = Flask(__name__)
 
@@ -28,11 +29,25 @@ def carregar_estoque():
             return json.load(estoque)
     except FileNotFoundError:
         return []
-    
+
 def salvar_estoque(estoque):
     with open('estoque.json', 'w') as antigo_etoque:
         json.dump(estoque, antigo_etoque, indent=4)
-
+palavra = "asdfghjklç"
+try:
+    conexao = mysql.connector.connect(
+        host = "Dharllan.mysql.pythonanywhere-services.com",
+        user = "Dharllan",
+        password = "mysqlroot",
+        database = "Dharllan$default"
+    )
+    msg = "CONEXÃO ESTABELECIDA COM A BASE DE DADOS"
+    cursor = conexao.cursor()
+    cursor.execute("SELECT * FROM Produtos;")
+    estoque_produtos = cursor.fetchall()
+except:
+    msg = "ERRO DE CONEXÃO COM A BASE DE DADOS"
+    estoque = ["O banco de dados está vazio ou a conexão falhou"]
 
 @app.route("/")
 @app.route("/dashboard")
@@ -41,7 +56,7 @@ def main():
 
 @app.route("/estoque")
 def estoque():
-    return render_template("estoque.html", estoque=carregar_estoque())
+    return render_template("estoque.html", msg=msg, estoque_produtos=estoque_produtos)
 
 @app.route("/cadastro-vendas")
 def cadastro_vendas():
@@ -53,23 +68,23 @@ def confirmar_compra():
     nova_compra = request.get_json()
 
     estoque = carregar_estoque()
-    
-    
+
+
     for produto_compra in nova_compra["produtos"]:
-        
+
         produto_existente = False
         indice = 0
 
         for produto_estoque in estoque:
             if produto_compra["nome"] == produto_estoque["nome"] and produto_compra["marca"] == produto_estoque["marca"]:
-                
+
                 produto_para_ser_adicionado = estoque[indice]
                 produto_para_ser_adicionado["qtd"] += produto_compra["quantidade"]
                 produto_existente = True
                 break
 
             indice += 1
-        
+
         if not produto_existente:
             estoque.append({
                 "nome": produto_compra["nome"],
@@ -117,7 +132,7 @@ def recuperar_senha():
 @app.route('/excluir-compra', methods=['POST'])
 def excluir_compra():
     compra_id = request.json.get('id')
-    
+
     # Carrega os dados do JSON
     with open('./historico_compras.json') as f:
         compras = json.load(f)

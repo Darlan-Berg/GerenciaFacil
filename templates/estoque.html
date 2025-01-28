@@ -14,28 +14,28 @@
         </div>
     </header>
 </main>
+
 <div class="tabela">
     <table>
         <tr>
             <td><strong>Nome</strong></td>
             <td><strong>Marca</strong></td>
-            <td><strong>Valor</strong></td>
-            <td><strong>Quantidade</strong></td>
             <td><strong>Data de Validade</strong></td>
+            <td><strong>Estoque</strong></td>
+            <td><strong>Valor de Compra</strong></td>
+            <td><strong>Valor de Venda</strong></td>
         </tr>
-        {% if estoque %}
-            {% for produto in estoque %}
-                <tr>
-                    <td><strong>{{ produto["nome"] }}</strong></td>
-                    <td><strong>{{ produto["marca"] }}</strong></td>
-                    <td><strong>R${{ produto["valor"] }}</strong></td>
-                    <td><strong>{{ produto["qtd"] }}</strong></td>
-                    <td><strong>{{ produto["data_validade"] }}</strong></td>
-                </tr>
-            {% endfor %}
-        {% endif %}
+        {% for linha in estoque_produtos %}
+            <tr>
+                <td><strong>{{ linha[1] }}</strong></td>
+                <td><strong>{{ linha[2] }}</strong></td>
+                <td><strong>{{ linha[3] }}</strong></td>
+                <td><strong>{{ linha[4] }}</strong></td>
+                <td><strong>{{ linha[5] }}</strong></td>
+                <td><strong>{{ linha[6] }}</strong></td>
+            </tr>
+        {% endfor %}
     </table>
 </div>
 
 {% endblock %}
-
