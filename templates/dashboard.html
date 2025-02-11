@@ -10,7 +10,11 @@
 <main>
     <header class="cabecalho-inferior">
         <div>
-            <h3> Bem Vindo(a) Ao Seu Dashboard </h3>
+            {% if usename %}
+                <h3> Bem Vindo(a) Ao Seu Dashboard {{ username }}</h3>
+            {% else %}
+                <h3> Bem Vindo(a) Ao Seu Dashboard do Gerenciafacil</h3>
+            {% endif %}
         </div>
     </header>
 </main>

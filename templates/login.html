@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="../static/main.css">    
+    <link rel="stylesheet" href="../static/main.css">
 </head>
     <body>
         <div class="page">
-            <form  method="POST" class="formLogin">
+            <form  method="POST" class="formLogin" action="/login">
                 <h1>Login</h1>
                 <p>Digite os seus dados de acesso nos campos abaixo.</p>
                 <label for="email">E-mail</label>
@@ -20,7 +20,7 @@
                 <span class="span-required">A senha tem conter no mínimo 6 dígitos</span>
                 <a href="/cadastro">Não possui uma conta? Cadastre-se!</a>
                 <a href="/recuperar-senha">Esqueci a senha</a>
-                <input type="button" value="Acessar" class="btn" id="botao" />
+                <input type="submit" value="Acessar" class="btn" id="botao" />
             </form>
         </div>
     </body>
@@ -64,7 +64,7 @@
 
 <script type="module" src="../static/index.js"></script>
 <script type="module">
-
+/*
 // Importando as funções necessárias
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
@@ -89,7 +89,7 @@ const auth = getAuth(app);
         function login() {
             signInWithEmailAndPassword(auth, document.getElementById("email").value, document.getElementById("senha").value)
                 .then((userCredential) => {
-                    // Logado 
+                    // Logado
                     const usuario = userCredential.user;
                     console.log("Deu certo", usuario);
                     window.location.href = '/dashboard'
@@ -102,7 +102,7 @@ const auth = getAuth(app);
                 });
         }
         // Faz com que, ao ser clicado, o botão de acesso irá chamar a função login()
-        document.getElementById("botao").addEventListener("click", login)
+        document.getElementById("botao").addEventListener("click", login)*/
     </script>
-    
-</html> 
+
+</html>

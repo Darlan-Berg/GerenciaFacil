@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, session
 import json
 import os
 import mysql.connector
@@ -49,10 +49,20 @@ except:
     msg = "ERRO DE CONEXÃO COM A BASE DE DADOS"
     estoque = ["O banco de dados está vazio ou a conexão falhou"]
 
+def adicionar_produto(id, nome, marca, data_validade, estoque, valor_compra, valor_venda):
+    'query = f"INSERT INTO Produtos (id, nome, marca, data_validade, estoque, valor_compra, valor_venda) VALUES ({id}, {nome}, {marca}, {data_validade}, {estoque}, {valor_compra}, {valor_venda});"'
+    'values = (id, nome, marca, data_validade, estoque, valor_compra, valor_venda)'
+    'cursor.execute(query, values)'
+    cursor.execute("INSERT INTO Produtos (id, nome, marca, data_validade, estoque, valor_compra, valor_venda) VALUES (%s, %s, %s, %s, %s, %s, %s)", (str(id), str(nome), str(marca), str(data_validade), str(estoque), str(valor_compra), str(valor_venda)))
+    conexao.commit()
+
 @app.route("/")
 @app.route("/dashboard")
 def main():
-    return render_template("dashboard.html")
+    if 'username' in session:
+        return render_template("dashboard.html", username=session['username'])
+    else:
+        return render_template("dashboard.html")
 
 @app.route("/estoque")
 def estoque():
@@ -66,6 +76,18 @@ def cadastro_vendas():
 def confirmar_compra():
     # recebe o JSON enviado pelo javascript
     nova_compra = request.get_json()
+
+    # acessando os dados dos produtos enviados pelo formulário
+    id = nova_compra['cod']
+    nome = request.form.get('nome')
+    marca = request.form.get('marca')
+    data_validade = request.form.get('data_validade')
+    estoque = request.form.get('quantidade')
+    valor_venda = request.form.get('valor_venda')
+    valor_compra = request.form.get('valor_compra')
+
+    #Enviar informaçoes da nova compra para o banco de dados
+    adicionar_produto(id, nome, marca, data_validade, estoque, valor_compra, valor_venda)
 
     estoque = carregar_estoque()
 
@@ -117,9 +139,22 @@ def cadastro_compras():
             historico_compras = json.load(arq_json)
         return render_template("compras.html", lista_compras=historico_compras)
 
-@app.route("/login", methods=["GET"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    return render_template("login.html")
+    if request.method == "POST":
+        try:
+            username = request.form['email']
+            pwd = request.form['senha']
+            cursor = conexao.cursor()
+            cursor.execute("SELECT Email, Senha FROM Usuarios WHERE Email = %s", (username,))
+            user = cursor.fetchone()
+            cursor.close()
+            if user[0] == username and user[1] == pwd:
+
+                return render_template('dashboard.html', username = username)
+        except:
+            return render_template('login.html')
+    return render_template('login.html')
 
 @app.route('/cadastro', methods=["GET", "POST"])
 def cadastro():

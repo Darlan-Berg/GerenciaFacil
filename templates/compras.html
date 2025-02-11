@@ -135,8 +135,7 @@ function adicionarProduto() {
     // adiciona o produto na lista
     produtos.push(produto);
 
-    // atualiza a lista de produtos no modal
-    atualizarListaProdutos();
+    confirmarCompra()
 
     // fechar o modal de produto depois adicionar
     fecharModal('.modal', `#backdrop2`);
@@ -207,7 +206,7 @@ function confirmarCompra() {
     <header class="cabecalho-inferior">
         <div>
             <h3 id="btn-adicionar-compra"> Adicinar Compra </h3>
-            <button onclick="abrirModal(`.modal-compras`, `#backdrop1`)">
+            <button onclick="abrirModal(`.modal`, `#backdrop2`)">
                 <img src="https://img.icons8.com/ios/50/plus-key.png" alt="botao de adição">
             </button>
         </div>
