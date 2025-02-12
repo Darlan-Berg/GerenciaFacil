@@ -158,6 +158,19 @@ def login():
 
 @app.route('/cadastro', methods=["GET", "POST"])
 def cadastro():
+    if request.method == 'POST':
+        try:
+            nome = request.form['nome']
+            email = request.form['email']
+            pwd = request.form['senha']
+            cursor = conexao.cursor()
+            cursor.execute("INSERT INTO Usuarios(Nome, Email, Senha) VALUES(%s, %s, %s)", (str(nome), str(email), str(pwd),))
+            conexao.commit()
+            cursor.close()
+            return redirect(url_for('login'))
+        except:
+            return redirect(url_for('estoque'))
+
     return render_template("cadastro_usuarios.html")
 
 @app.route("/recuperar-senha")
