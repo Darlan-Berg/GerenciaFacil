@@ -2,8 +2,16 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify, s
 import json
 import os
 import mysql.connector
+from flask_mysqldb import MySQL
 
 app = Flask(__name__)
+
+'''app.config["MYSQL_HOST"] = "Dharllan.mysql.pythonanywhere-services.com"
+app.config["MYSQL_USER"] = "Dharllan"
+app.config["MYSQL_PASSWORD"] = "mysqlroot"
+app.config["MYSQL_DB"] = "Dharllan$default"
+
+mysql = MySQL(app)'''
 
 if __name__ == "__main__":
     app.run(debug=True)
@@ -45,9 +53,11 @@ try:
     cursor = conexao.cursor()
     cursor.execute("SELECT * FROM Produtos;")
     estoque_produtos = cursor.fetchall()
+    cursor.close()
 except:
     msg = "ERRO DE CONEXÃO COM A BASE DE DADOS"
     estoque = ["O banco de dados está vazio ou a conexão falhou"]
+
 
 def adicionar_produto(id, nome, marca, data_validade, estoque, valor_compra, valor_venda):
     'query = f"INSERT INTO Produtos (id, nome, marca, data_validade, estoque, valor_compra, valor_venda) VALUES ({id}, {nome}, {marca}, {data_validade}, {estoque}, {valor_compra}, {valor_venda});"'
@@ -164,12 +174,12 @@ def cadastro():
             email = request.form['email']
             pwd = request.form['senha']
             cursor = conexao.cursor()
-            cursor.execute("INSERT INTO Usuarios(Nome, Email, Senha) VALUES(%s, %s, %s)", (str(nome), str(email), str(pwd),))
-            conexao.commit()
+            cursor.execute("INSERT INTO Usuarios(Nome, Email, Senha) VALUES(%s, %s, %s)", (nome, email, pwd))
+            conexao.commit()  # Agora usa o Flask-MySQL corretamente
             cursor.close()
             return redirect(url_for('login'))
-        except:
-            return redirect(url_for('estoque'))
+        except Exception as erro:
+            return render_template('estoque.html', erro = erro)
 
     return render_template("cadastro_usuarios.html")
 

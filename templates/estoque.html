@@ -36,6 +36,16 @@
             </tr>
         {% endfor %}
     </table>
+    {% if erro %}
+    <h1>
+        {{erro}}
+    </h1>
+    {% else %}
+    <h1>
+        Erro está vazio
+    </h1>
+    {% endif %}
+
 </div>
 
 {% endblock %}
